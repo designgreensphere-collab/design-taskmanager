@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Design Task Manager V4 — Pastel Creative Workspace</title>
+<style>
+:root{--green:#2457a6;--green2:#3478c8;--mint:#e8f1ff;--cream:#f4f7fc;--ink:#202b27;--muted:#77827d;--line:#e7e9e3;--white:#fff;--orange:#f2a65a;--blue:#6c91c5;--red:#d87569;--shadow:0 8px 30px rgba(25,55,43,.07)}
+*{box-sizing:border-box}body{margin:0;background:var(--cream);color:var(--ink);font:14px/1.45 Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;border:0}.app{display:flex;min-height:100vh}.sidebar{width:245px;background:#183b70;color:#fff;padding:24px 16px;display:flex;flex-direction:column;gap:25px}.brand{display:flex;align-items:center;gap:11px;padding:0 8px}.logo{width:38px;height:38px;border-radius:12px;background:#e2edff;color:#2457a6;display:grid;place-items:center;font-weight:900;font-size:18px}.brand strong{display:block;font-size:14px;letter-spacing:.4px}.brand small{color:#c2d5f2;font-size:11px}.nav-label{color:#a9c4ed;font-size:10px;font-weight:800;letter-spacing:1.2px;padding:0 11px;margin:4px 0}.nav{display:grid;gap:5px}.nav button{display:flex;align-items:center;gap:12px;color:#c8dcd3;background:transparent;text-align:left;padding:11px 12px;border-radius:10px;font-size:13px}.nav button.active,.nav button:hover{background:#28528c;color:#fff}.nav .ico{width:18px;text-align:center;font-size:16px}.side-bottom{margin-top:auto;border-top:1px solid #355887;padding:16px 8px 0;color:#c2d5f2;font-size:11px}.profile{display:flex;align-items:center;gap:9px;margin-top:13px;color:#fff;font-size:12px}.avatar{width:30px;height:30px;border-radius:50%;background:#e6c9a5;color:#533d2c;display:grid;place-items:center;font-weight:800}.main{flex:1;min-width:0}.topbar{height:70px;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:3}.crumb{color:var(--muted);font-size:12px}.top-actions{display:flex;align-items:center;gap:12px}.iconbtn{background:#f5f7f4;border:1px solid var(--line);border-radius:10px;width:36px;height:36px}.userpill{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700}.content{padding:30px 34px;max-width:1500px;margin:auto}.welcome{display:flex;justify-content:space-between;align-items:flex-start;gap:20px;margin-bottom:24px}.eyebrow{color:var(--green2);font-size:11px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase}.welcome h1{font-size:27px;letter-spacing:-.7px;margin:5px 0}.welcome p{margin:0;color:var(--muted)}.primary{background:var(--green);color:#fff;border-radius:10px;padding:11px 16px;font-weight:700;box-shadow:0 5px 12px #174b4022}.primary:hover{background:var(--green2)}.secondary{background:#fff;color:var(--green);border:1px solid var(--line);border-radius:9px;padding:9px 12px;font-weight:650}.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:20px 0 24px}.stat{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px;box-shadow:0 3px 12px #203b2c08}.stat-top{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.stat-icon{width:30px;height:30px;display:grid;place-items:center;border-radius:9px;background:var(--mint);color:var(--green)}.stat strong{display:block;font-size:26px;margin-top:10px;letter-spacing:-.5px}.stat small{color:var(--muted);font-size:11px}.section-head{display:flex;align-items:center;justify-content:space-between;margin:26px 0 13px;gap:12px}.section-head h2{font-size:16px;margin:0}.section-head p{color:var(--muted);margin:3px 0 0;font-size:12px}.panel{background:#fff;border:1px solid var(--line);border-radius:15px;padding:18px;box-shadow:0 3px 12px #203b2c08}.quick-grid{display:grid;grid-template-columns:1.3fr 1fr;gap:16px}.activity{display:grid;gap:14px}.activity-row{display:flex;gap:11px;align-items:flex-start}.dot{width:9px;height:9px;border-radius:50%;background:#6eaa8c;margin-top:5px;flex:none}.activity-row strong{font-size:12px}.activity-row p{font-size:11px;color:var(--muted);margin:2px 0 0}.mini-list{display:grid;gap:10px}.mini-task{display:flex;align-items:center;justify-content:space-between;padding:10px;background:#fafbf8;border-radius:10px;gap:10px}.mini-task strong{font-size:12px}.mini-task small{display:block;color:var(--muted);font-size:10px}.tag{display:inline-flex;align-items:center;padding:4px 8px;border-radius:20px;font-size:10px;font-weight:800;white-space:nowrap;background:#eef1ed;color:#66736b}.tag.green{background:#e4f3e9;color:#28734b}.tag.blue{background:#e9f0fb;color:#426da7}.tag.orange{background:#fff1df;color:#a96a22}.tag.red{background:#fae9e6;color:#ae5348}.tag.purple{background:#f0eafb;color:#7755a9}.toolbar{display:flex;gap:8px;align-items:center;flex-wrap:wrap}.search{border:1px solid var(--line);background:#fff;border-radius:9px;padding:9px 11px;min-width:190px;outline:none}.select{border:1px solid var(--line);background:#fff;border-radius:9px;padding:9px 11px;color:#46544c}.board{display:grid;grid-template-columns:repeat(4,minmax(220px,1fr));gap:12px;overflow:auto;padding-bottom:8px}.column{background:#f0f2ed;border-radius:13px;padding:11px;min-height:250px}.colhead{display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:800;margin:2px 2px 11px}.count{background:#fff;border-radius:20px;padding:2px 7px;color:var(--muted);font-size:10px}.task{background:#fff;border:1px solid #e8ebe5;border-radius:11px;padding:12px;margin-bottom:9px;box-shadow:0 2px 7px #173b2c08;cursor:pointer}.task:hover{border-color:#a9cbb9;transform:translateY(-1px)}.task h3{font-size:12px;margin:8px 0 5px}.task p{font-size:10px;color:var(--muted);margin:0 0 10px}.taskfoot{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:10px}.person{display:flex;align-items:center;gap:5px}.tiny-avatar{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#e8e1d6;color:#5c4b3d;font-size:9px;font-weight:800}.table-wrap{overflow:auto}.table{width:100%;border-collapse:collapse;min-width:650px}.table th{text-align:left;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.6px;padding:11px;border-bottom:1px solid var(--line)}.table td{padding:13px 11px;border-bottom:1px solid #f0f1ed;font-size:12px}.table tr:last-child td{border:0}.product-title{font-weight:750}.muted{color:var(--muted)}.tabs{display:flex;gap:5px;background:#edf0ea;padding:4px;border-radius:10px}.tabs button{background:transparent;padding:7px 11px;border-radius:7px;color:#66736b;font-size:11px;font-weight:700}.tabs button.active{background:#fff;color:var(--green);box-shadow:0 1px 4px #00000010}.empty{padding:35px;text-align:center;color:var(--muted);font-size:12px}.hidden{display:none!important}.modal-backdrop{position:fixed;inset:0;background:#0c211bc0;display:grid;place-items:center;padding:18px;z-index:10}.modal{width:min(620px,100%);max-height:90vh;overflow:auto;background:#fff;border-radius:17px;padding:22px;box-shadow:0 20px 80px #0004}.modal h2{margin:0 0 4px;font-size:19px}.modal-sub{color:var(--muted);font-size:12px;margin:0 0 18px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:grid;gap:5px}.field.full{grid-column:1/-1}.field label{font-size:11px;font-weight:750;color:#536159}.field input,.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:9px;padding:10px;outline:none;background:#fff}.field textarea{min-height:85px;resize:vertical}.modal-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:18px}.close{float:right;background:#f3f5f1;border-radius:8px;width:30px;height:30px}.detail-line{padding:11px 0;border-bottom:1px solid var(--line);font-size:12px}.detail-line:last-child{border:0}.detail-line b{display:block;color:var(--muted);font-size:10px;text-transform:uppercase;margin-bottom:4px}.notice{background:#edf5ef;border:1px solid #dcebe0;color:#35694b;border-radius:10px;padding:11px;font-size:11px;margin-top:12px}.footer-note{font-size:10px;color:var(--muted);margin-top:22px;text-align:center}
+@media(max-width:900px){.sidebar{width:70px;padding:20px 9px}.brand div:not(.logo),.nav-label,.nav button span:not(.ico),.side-bottom{display:none}.brand{padding:0;justify-content:center}.nav button{justify-content:center;padding:12px}.stats{grid-template-columns:repeat(2,1fr)}.quick-grid{grid-template-columns:1fr}.content{padding:22px 18px}.topbar{padding:0 18px}}
+@media(max-width:560px){.welcome{display:block}.welcome .primary{margin-top:15px}.stats{gap:8px}.stat{padding:12px}.stat strong{font-size:22px}.formgrid{grid-template-columns:1fr}.field.full{grid-column:auto}.topbar{height:58px}.content{padding:18px 12px}.toolbar{width:100%}.search{flex:1;min-width:120px}}
+ .column .colhead .secondary{background:#fff;border:1px solid #dce5f1;color:#315f9d}.panel .mini-task{margin:5px 0}
+
+/* V4 — Gen Z pastel soft workspace */
+:root{--green:#7898c9;--green2:#8da9d8;--mint:#eaf1ff;--cream:#f8f7fc;--ink:#34364a;--muted:#85869a;--line:#e9e7f1;--white:#fff;--shadow:0 8px 30px rgba(111,116,164,.09)}
+body{background:linear-gradient(135deg,#f6f8ff 0%,#fff7fb 55%,#f5f8ff 100%);color:#34364a}
+.sidebar{background:linear-gradient(180deg,#dce8ff 0%,#f5e4f0 100%);color:#49516d;border-right:1px solid #e5e5f2}
+.brand small,.nav-label,.side-bottom{color:#777e9b}.nav button{color:#59617e}.nav button.active,.nav button:hover{background:#fff;color:#586fa7;box-shadow:0 3px 12px #9da9ce22}.logo{background:#fff;color:#718dc4}.topbar{background:#ffffffdc;backdrop-filter:blur(12px)}
+.primary{background:linear-gradient(120deg,#8caee2,#d99fc7);box-shadow:0 5px 14px #a6a9d733}.primary:hover{background:linear-gradient(120deg,#789bd3,#cc8fba)}.secondary{color:#687da9;border-color:#e5e3ef}.column{background:#f0eff8;border:1px solid #e7e4f1}.task{border-color:#eeebf4;box-shadow:0 3px 10px #8e91b00c}.task:hover{border-color:#c7c9e8}.panel,.stat{border-color:#ece9f4;box-shadow:0 5px 18px #9295b00d}.search,.select,.field input,.field select,.field textarea{border-color:#e6e4ef}.tabs{background:#f0eff7}.tabs button.active{color:#687da9}.tag{border-radius:8px}.modal-backdrop{background:#45476388}
+.board .column{transition:background .2s,border-color .2s}.colhead{gap:8px}.board-color{width:22px;height:22px;border:1px solid #ffffff;border-radius:7px;padding:0;background:transparent;cursor:pointer}.chat-box{border:1px solid #e8e6f1;border-radius:12px;padding:12px;background:#fbfaff;max-height:220px;overflow:auto;display:grid;gap:8px}.chat-message{background:#fff;border:1px solid #eeeaf5;border-radius:10px;padding:8px 10px;font-size:12px}.chat-message small{display:block;color:#9995aa;font-size:10px;margin-bottom:3px}.chat-compose{display:flex;gap:8px;align-items:flex-end}.chat-compose textarea{flex:1;min-height:48px}
+
+/* EmailJS invite toast */
+.dtm-toast-wrap{position:fixed;right:18px;bottom:18px;z-index:9999;display:flex;flex-direction:column;gap:8px;max-width:340px}
+.dtm-toast{background:#fff;border:1px solid #e9e7f1;border-left:4px solid #8caee2;border-radius:12px;padding:12px 14px;box-shadow:0 8px 30px rgba(111,116,164,.18);font-size:13px;color:#34364a;animation:dtmToastIn .25s ease}
+.dtm-toast.success{border-left-color:#4c8b69}.dtm-toast.error{border-left-color:#a83e58}.dtm-toast strong{display:block;margin-bottom:2px}
+@keyframes dtmToastIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+button[disabled]{opacity:.6;cursor:wait}
+/* V5 — owner admin, per-module access */
+.v5-lock{background:#f3f0fb;border:1px dashed #d8d1ee;color:#6d6591;border-radius:10px;padding:10px 12px;font-size:11px;margin:0 0 14px}
+.v5-perm{display:grid;grid-template-columns:1fr auto auto;gap:6px 14px;align-items:center;font-size:11px;margin-top:10px}
+.v5-perm label{display:flex;gap:5px;align-items:center}
+.field input[disabled],.field select[disabled],.field textarea[disabled]{background:#f6f5fa;color:#85869a;cursor:not-allowed}
+.userpill .secondary{padding:5px 10px;font-size:11px}
+.v5-err{color:#a83e58;font-size:11px;min-height:14px;margin-top:8px}
+/* V4.6 — role badges, member status, board controls, public invite URL */
+.role-badge{display:inline-flex;align-items:center;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:800;letter-spacing:.5px;white-space:nowrap;line-height:1.4;border:1px solid transparent;text-transform:uppercase}
+.role-badge.owner{background:linear-gradient(120deg,#dfe9ff,#fbe3f0);color:#5a6ea6;border-color:#d7ddf3}
+.role-badge.admin{background:#efe8ff;color:#7353a6;border-color:#e0d6f6}
+.role-badge.member{background:#e4f4ef;color:#3f7d6f;border-color:#d3ece4}
+.role-badge.guest{background:#f1f0f6;color:#85869a;border-color:#e6e4ef}
+.side-bottom .role-badge{margin-top:4px}
+.userpill .role-badge{font-size:9px}
+.col-btn{padding:3px 7px!important;font-size:10px!important;line-height:1.3}
+.secondary.danger{color:#a83e58;border-color:#f1d9df}.secondary.danger:hover{background:#fdf1f4}
+.member-card{border:1px solid #ece9f4;border-radius:13px;padding:12px;background:#fff;margin-top:8px}
+.member-head{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;flex-wrap:wrap}
+.member-meta{font-size:10px;color:var(--muted);margin-top:2px}
+.badge-row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.member-actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.member-actions .secondary,.member-actions .select{padding:6px 9px;font-size:11px}
+.url-box{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.url-box .search{flex:1;min-width:220px}
+.link-preview{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:11px;background:#f6f5fb;border:1px dashed #dcd8ec;border-radius:9px;padding:8px 10px;word-break:break-all;color:#5d6283}
+.stage-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.stage-chip{display:inline-flex;align-items:center;gap:2px;background:#f4f3fa;border:1px solid #e6e4ef;border-radius:8px;padding:3px 3px 3px 8px;font-size:11px}
+.stage-chip button{background:transparent;padding:0 5px;font-size:11px;color:#7d7f99;border-radius:5px}.stage-chip button:hover{background:#fff}
+.board-row{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.column.drop-hover{outline:2px dashed #9fb3e0;outline-offset:-4px}
+.access-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;align-items:center}
+.req-card{border:1px solid #e6dcf6;background:#faf7ff;border-radius:12px;padding:11px;margin-top:8px}
+@media(max-width:560px){.userpill #pillName,.userpill #pillRole{display:none}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="brand"><div class="logo">D</div><div><strong>DESIGN TASK</strong><small>Creative Workspace</small></div></div>
+  <div><div class="nav-label">WORKSPACE</div><nav class="nav" id="nav">
+    <button class="active" data-page="dashboard"><span class="ico">▦</span><span>Dashboard</span></button>
+    <button data-page="design"><span class="ico">✳</span><span>Design Request</span></button>
+    <button data-page="products"><span class="ico">▣</span><span>Product Management</span></button>
+    <button data-page="todo"><span class="ico">☑</span><span>My To-Do List</span></button>
+    <button data-page="calendar"><span class="ico">▦</span><span>Calendar & Deadline</span></button>
+    <button data-page="reports"><span class="ico">▥</span><span>Reports</span></button>
+    <button data-page="settings"><span class="ico">⚙</span><span>Settings & Team</span></button>
+  </nav></div>
+  <div class="side-bottom">INTERNAL WORKSPACE<div class="profile"><div class="avatar" id="sideAvatar">?</div><div><b id="sideName">Tamu</b><br><span id="sideRole"></span></div></div></div>
+</aside>
+<main class="main">
+<header class="topbar"><div class="crumb">Workspace <span style="color:#c3cbc4">/</span> <b id="crumb">Dashboard</b></div><div class="top-actions"><button class="iconbtn" title="Notifikasi" onclick="showToast('','Notifikasi','Notifikasi request, komentar, dan deadline akan tampil di sini.')">♧</button><div class="userpill"><div class="avatar" id="pillAvatar">?</div><span id="pillName">Tamu</span><span id="pillRole"></span><button class="secondary hidden" id="requestAccessBtn" onclick="openAccessRequest()">Minta akses</button><button class="secondary" id="authBtn" onclick="authAction()">Masuk</button></div></div></header>
+<div class="content">
+
+<section id="dashboard" class="page">
+  <div class="welcome"><div><div class="eyebrow" id="todayLabel"></div><h1 id="greeting">Good morning 👋</h1><p id="dailyQuote">Ini ringkasan aktivitas dan pekerjaan yang perlu kamu pantau hari ini.</p><div class="access-chips" id="greetingMeta"></div></div><button class="primary" id="dashCreateBtn" onclick="openCreate(can('design','edit')?'design':'todo')">＋ Buat Request / Task</button></div>
+  <div class="stats">
+    <div class="stat"><div class="stat-top"><span>Total Design Request</span><span class="stat-icon">✳</span></div><strong id="statDesign">0</strong><small>Semua request masuk</small></div>
+    <div class="stat"><div class="stat-top"><span>Dalam Proses</span><span class="stat-icon">◷</span></div><strong id="statProcess">0</strong><small>Desain sedang dikerjakan</small></div>
+    <div class="stat"><div class="stat-top"><span>Menunggu Revisi</span><span class="stat-icon">↻</span></div><strong id="statRevision">0</strong><small>Perlu tindak lanjut</small></div>
+    <div class="stat"><div class="stat-top"><span>Produk Berjalan</span><span class="stat-icon">▣</span></div><strong id="statProduct">0</strong><small>Semua board produk</small></div>
+  </div>
+  <div class="quick-grid">
+    <div><div class="section-head"><div><h2>Prioritas hari ini</h2><p>Task dengan deadline terdekat</p></div><button class="secondary" onclick="showPage('todo')">Lihat semua</button></div><div class="panel mini-list" id="priorityList"></div></div>
+    <div><div class="section-head"><div><h2>Aktivitas terbaru</h2><p>Update dari workspace kamu</p></div></div><div class="panel activity" id="activityList"></div></div>
+  </div>
+  <div class="section-head"><div><h2>Ringkasan produk & brand</h2><p>Pantau proses produk dalam satu tempat</p></div><button class="secondary" id="dashProductsBtn" onclick="showPage('products')">Buka Product Management →</button></div>
+  <div class="panel table-wrap"><table class="table"><thead><tr><th>Brand / Produk</th><th>Board</th><th>Status</th><th>Target selesai</th></tr></thead><tbody id="dashboardProducts"></tbody></table></div>
+</section>
+
+<section id="design" class="page hidden">
+  <div class="welcome"><div><div class="eyebrow">CREATIVE WORKFLOW</div><h1>Design Request</h1><p>Kelola request desain, revisi, dan persetujuan dari semua departemen.</p></div><button class="primary" id="designCreateBtn" onclick="openCreate('design')">＋ Tambah Request</button></div>
+  <div class="section-head"><div><h2>Request Board</h2><p>Setiap kartu mewakili satu pekerjaan desain. Seret kartu antar kolom untuk mengubah status.</p></div><div class="toolbar"><input class="search" id="designSearch" placeholder="Cari task / requester..." oninput="renderDesign()"><select class="select" id="deptFilter" onchange="renderDesign()"><option value="">Semua departemen</option></select></div></div>
+  <div class="v5-lock hidden" id="designLock">🔒 Mode lihat saja — kamu tidak memiliki izin edit untuk Design Request. Tambah, edit, hapus, ubah status, dan drag & drop dikunci. Minta akses edit ke Owner Admin bila diperlukan.</div>
+  <div class="board" id="designBoard"></div>
+  <div class="notice">Klik kartu untuk melihat detail. Kolom kosong atau template bisa dihapus dengan tombol 🗑 — task di dalamnya otomatis dipindahkan ke kolom pertama. Data tersimpan di browser ini.</div>
+</section>
+
+<section id="products" class="page hidden">
+  <div class="welcome"><div><div class="eyebrow">BRAND & PRODUCT PIPELINE</div><h1>Product Management</h1><p>Pantau sample, repeat, dan produksi produk jadi.</p></div><button class="primary" id="productCreateBtn" onclick="openCreate('product')">＋ Tambah Produk</button></div>
+  <div class="section-head"><div><h2>Product tracker</h2><p>Gunakan Board untuk alur kerja atau Table untuk melihat data ringkas.</p></div><div class="toolbar"><input class="search" id="productSearch" placeholder="Cari nama / judul produk..." oninput="renderProducts()"><div class="tabs"><button id="boardTab" class="active" onclick="setProductView('board')">Board</button><button id="tableTab" onclick="setProductView('table')">Table</button></div><select class="select" id="productCategory" onchange="renderProducts()"><option value="">Semua board</option></select></div></div>
+  <div class="v5-lock hidden" id="productLock">🔒 Mode lihat saja — kamu tidak memiliki izin edit untuk Product Management. Tambah, edit, hapus, ubah status, dan drag & drop dikunci. Minta akses edit ke Owner Admin bila diperlukan.</div>
+  <div id="productBoard" class="board"></div>
+  <div id="productTable" class="panel table-wrap hidden"><table class="table"><thead><tr><th>Brand / Produk</th><th>Board</th><th>PIC</th><th>Deadline</th><th>Status</th></tr></thead><tbody id="productRows"></tbody></table></div>
+</section>
+
+<section id="todo" class="page hidden">
+  <div class="welcome"><div><div class="eyebrow">PERSONAL WORKSPACE</div><h1>My To-Do List</h1><p>Catat pekerjaan pribadi dan follow-up yang tidak boleh terlewat.</p></div><button class="primary" onclick="openCreate('todo')">＋ Tambah To-Do</button></div>
+  <div class="panel table-wrap"><table class="table"><thead><tr><th>Task</th><th>Kategori</th><th>Deadline</th><th>Prioritas</th><th>Status</th><th></th></tr></thead><tbody id="todoRows"></tbody></table></div>
+</section>
+
+<section id="calendar" class="page hidden">
+  <div class="welcome"><div><div class="eyebrow">SCHEDULE OVERVIEW</div><h1>Calendar & Deadline</h1><p>Daftar deadline dari desain, produk, dan pekerjaan pribadi.</p></div></div>
+  <div class="panel table-wrap"><table class="table"><thead><tr><th>Task</th><th>Jenis</th><th>PIC / Requester</th><th>Deadline</th><th>Status</th></tr></thead><tbody id="calendarRows"></tbody></table></div>
+</section>
+
+<section id="reports" class="page hidden">
+  <div class="welcome"><div><div class="eyebrow">WORKSPACE INSIGHTS</div><h1>Reports</h1><p>Ringkasan sederhana untuk memantau beban kerja.</p></div></div>
+  <div class="panel" style="margin-bottom:16px"><div class="toolbar"><label class="muted">Periode laporan</label><select class="select" id="reportMode" onchange="renderReports()"><option value="realtime">Realtime / Semua data</option><option value="month">Bulanan</option><option value="year">Tahunan</option></select><select class="select" id="reportMonth" onchange="renderReports()"></select><select class="select" id="reportYear" onchange="renderReports()"></select></div><p class="muted" id="reportPeriodNote" style="font-size:11px;margin:10px 0 0">Data historis tersimpan di browser ini.</p></div>
+  <div class="stats"><div class="stat"><div class="stat-top">Total Request</div><strong id="reportDesign">0</strong><small>Design request</small></div><div class="stat"><div class="stat-top">Produk</div><strong id="reportProduct">0</strong><small>Product pipeline</small></div><div class="stat"><div class="stat-top">To-Do Aktif</div><strong id="reportTodo">0</strong><small>Belum selesai</small></div><div class="stat"><div class="stat-top">Departemen</div><strong id="reportDept">0</strong><small>Departemen terdaftar</small></div></div>
+  <div class="quick-grid"><div class="panel"><h3 style="font-size:13px;margin-top:0">Request per departemen</h3><div id="deptReport"></div></div><div class="panel"><h3 style="font-size:13px;margin-top:0">Komposisi produk</h3><div id="productReport"></div></div></div>
+</section>
+
+<section id="settings" class="page hidden">
+  <div class="welcome"><div><div class="eyebrow">WORKSPACE CONFIGURATION · KHUSUS OWNER ADMIN</div><h1>Settings & Team</h1><p>Atur URL publik, departemen, undangan, status akun, hak akses per modul, dan board.</p></div><span id="settingsBadge"></span></div>
+
+  <div class="panel">
+    <h2 style="font-size:15px;margin-top:0">🔗 URL publik & link undangan</h2>
+    <p class="muted" style="font-size:11px">Semua link undangan memakai URL publik ini, sehingga anggota yang mengklik link di email langsung membuka aplikasi — tanpa login Netlify dan tanpa halaman "Page Not Found". Jangan gunakan URL deploy preview / privat.</p>
+    <div class="url-box" style="margin-top:12px"><input id="publicBaseInput" class="search" type="url" placeholder="https://designtaskmanager.netlify.app/"><button class="primary" onclick="savePublicBase()">Simpan URL</button><button class="secondary" onclick="resetPublicBase()">Pakai default</button></div>
+    <div class="v5-err" id="publicBaseErr"></div>
+    <div class="field"><label>URL publik aktif · contoh link undangan singkat</label><div class="link-preview" id="inviteLinkPreview"></div></div>
+  </div>
+
+  <div class="quick-grid" style="margin-top:16px">
+    <div class="panel"><h2 style="font-size:15px;margin-top:0">Departemen</h2><p class="muted" style="font-size:11px">Tambahkan, ubah, atau hapus nama divisi sesuai struktur perusahaan.</p><div class="toolbar" style="margin:14px 0"><input id="newDept" class="search" placeholder="Nama departemen baru"><button class="primary" onclick="addDepartment()">＋ Tambah</button></div><div id="departmentList" class="mini-list"></div></div>
+    <div class="panel"><h2 style="font-size:15px;margin-top:0">Preview profil / divisi</h2><p class="muted" style="font-size:11px">Pilih divisi untuk melihat sapaan dashboard Owner Admin. Anggota undangan otomatis disapa sesuai departemennya.</p><div class="field" style="margin-top:14px"><label>Divisi yang sedang dilihat</label><select id="previewDept" class="select" style="width:100%" onchange="setPreviewDept(this.value)"></select></div><div class="notice" id="greetingPreview">Dashboard akan menyapa sesuai divisi.</div>
+      <h2 style="font-size:15px;margin:22px 0 5px">Undang anggota</h2><p class="muted" style="font-size:11px">Kirim email undangan sungguhan melalui EmailJS. Link berisi departemen, sapaan, dan akses modul — otomatis diterapkan saat dibuka.</p>
+      <div class="formgrid" style="margin-top:12px">
+        <div class="field"><label>Nama</label><input id="inviteName" placeholder="Nama anggota"></div>
+        <div class="field"><label>Email kantor</label><input id="inviteEmail" type="email" placeholder="nama@perusahaan.com"></div>
+        <div class="field"><label>Departemen</label><select id="inviteDept" onchange="renderInviteRolePreview()"></select></div>
+        <div class="field"><label>Role</label><div id="inviteRolePreview" style="padding:7px 0"></div><small class="muted">Undangan selalu sebagai ANGGOTA. Tidak ada opsi Admin.</small></div>
+        <div class="field full"><label>Akses modul (diatur Owner Admin)</label><div class="v5-perm"><b>Design Request</b><label><input type="checkbox" id="inviteDesignView" checked onchange="syncPermBoxes('inviteDesign','view')"> Lihat</label><label><input type="checkbox" id="inviteDesignEdit" onchange="syncPermBoxes('inviteDesign','edit')"> Edit</label><b>Product Management</b><label><input type="checkbox" id="inviteProductsView" onchange="syncPermBoxes('inviteProducts','view')"> Lihat</label><label><input type="checkbox" id="inviteProductsEdit" onchange="syncPermBoxes('inviteProducts','edit')"> Edit</label></div></div>
+      </div>
+      <button class="primary" style="margin-top:12px" id="inviteBtn" onclick="inviteMember()">＋ Kirim undangan</button>
+    </div>
+  </div>
+
+  <div class="panel" style="margin-top:16px">
+    <h2 style="font-size:15px;margin-top:0">👥 Status akun & anggota</h2>
+    <p class="muted" style="font-size:11px">Role, izin lihat/edit per modul, dan status undangan setiap akun. Hanya Owner Admin yang dapat mengubah akses.</p>
+    <div class="notice">Owner Admin tunggal: <b>designgreensphere@gmail.com</b>. Tidak ada anggota yang otomatis menjadi admin — setiap permintaan atau perubahan akses (termasuk status ADMIN (ACC)) harus di-ACC Owner Admin di halaman ini. Setelah mengubah akses, klik <b>Kirim ulang undangan</b> agar perangkat anggota menerima akses terbaru.</div>
+    <div id="accessRequests"></div>
+    <div class="url-box" style="margin-top:12px"><input id="requestLinkInput" class="search" placeholder="Tempel link permintaan akses dari email anggota (…?req=…)"><button class="secondary" onclick="importRequestFromInput()">Tinjau permintaan</button></div>
+    <div id="memberStatus"></div>
+  </div>
+
+  <div class="panel" style="margin-top:16px"><h2 style="font-size:15px;margin-top:0">Pengaturan board</h2><p class="muted" style="font-size:11px">Ubah nama, warna, tahapan, atau hapus kolom/board template. Saat board dihapus, semua task di dalamnya dipindahkan dengan aman ke kolom/board pertama.</p><div id="boardConfig"></div></div>
+
+  <div class="panel" style="margin-top:16px"><h2 style="font-size:15px;margin-top:0">Notifikasi chat</h2><label style="font-size:12px;display:flex;gap:9px;align-items:center"><input id="soundPreference" type="checkbox" onchange="toggleChatSound(this.checked)"> Aktifkan suara saat ada pesan chat masuk</label><p class="muted" style="font-size:10px;margin-bottom:0">Pengaturan ini berlaku untuk browser/perangkat ini.</p></div>
+</section>
+
+<div class="footer-note">DESIGN TASK MANAGER · V4 Pastel Creative Workspace · Data tersimpan di browser</div>
+</div>
+</main>
+</div>
+<div id="modalRoot"></div>
+<script>
+'use strict';
+/* =====================================================================
+   1. KONFIGURASI
+   ===================================================================== */
+const EMAILJS_CONFIG={publicKey:'lS1lBvhUP94BO1Fih',serviceId:'service_r56gjka',templateId:'template_48m2r2m'};
+const DEFAULT_PUBLIC_BASE='https://designtaskmanager.netlify.app/';
+const OWNER_EMAIL='designgreensphere@gmail.com';
+const OWNER_NAME='Admin Designer';
+const OWNER_HASH='f05810409358e31893f408dfa96eece095dff0aeb8b22e0906396706fa1fa073'; // SHA-256 dari "email:kode admin"
+const MODULES={design:'Design Request',products:'Product Management'};
+const DEFAULT_DEPARTMENTS=['Marketing','HRD','R&D','Sales','Operasional'];
+const DEFAULT_DESIGN_STAGES=['New Request','In Progress','Revision','Waiting Approval','Done'];
+const DEFAULT_PRODUCT_CATS=['Sample','Repeat','Produksi'];
+const DEFAULT_PRODUCT_TITLES={Sample:'Sample',Repeat:'Repeat',Produksi:'Finished Product'};
+const DEFAULT_PRODUCT_STAGES={Sample:['Request sample','Proses pembuatan sample','Sample diterima','Evaluasi sample','Revisi sample','Sample approved'],Repeat:['Repeat request','Konfirmasi kebutuhan','Menunggu jadwal produksi','Proses produksi','QC','Produk siap','Selesai'],Produksi:['Persiapan produksi','Menunggu bahan baku','Proses produksi','Pengemasan','Quality Control','Barang jadi','Produksi selesai']};
+const NEW_BOARD_STAGES=['Request','Proses','Review','Selesai'];
+const DESIGN_TYPES=['Social Media','Packaging','Marketplace Banner','Poster','Brochure','Label','Catalog','Digital Asset','Other'];
+const PRIORITIES=['Low','Medium','High','Urgent'];
+const PALETTE=['#e7efff','#fbe8f2','#e6f5f2','#fff1df','#eee8ff','#e9f3ff','#f8e8e4','#edf0f5'];
+const PRIORITY_COLORS={Low:['#e8f4ed','#4c8b69'],Medium:['#fff2d9','#a7782c'],High:['#ffe8ef','#b45d7b'],Urgent:['#f8dfe3','#a83e58']};
+const PAGE_TITLES={dashboard:'Dashboard',design:'Design Request',products:'Product Management',todo:'My To-Do List',calendar:'Calendar & Deadline',reports:'Reports',settings:'Settings & Team'};
+const K={design:'dtm_design',products:'dtm_products',todos:'dtm_todos',departments:'dtm_departments',invites:'dtm_invites',previewDept:'dtm_preview_dept',designStages:'dtm_v3_designStages',productTitles:'dtm_v3_productTitles',productStages:'dtm_v3_productStages',productCats:'dtm_v6_productCats',access:'dtm_v3_access',designColors:'dtm_v4_designColors',productColors:'dtm_v4_productColors',sound:'dtm_v4_sound',session:'dtm_v5_session',requests:'dtm_v5_requests',publicBase:'dtm_public_base',activities:'dtm_v6_activities'};
+const PENDING_REQ_KEY='dtm_pending_req';
+
+/* =====================================================================
+   2. HELPER
+   ===================================================================== */
+const $=id=>document.getElementById(id);
+function load(k,f){try{const raw=localStorage.getItem(k);if(raw===null)return f;const v=JSON.parse(raw);return v??f}catch(_){return f}}
+function loadArr(k,seed){const v=load(k,null);return Array.isArray(v)?v:JSON.parse(JSON.stringify(seed))}
+function loadObj(k){const v=load(k,null);return v&&typeof v==='object'&&!Array.isArray(v)?v:{}}
+function store(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(_){showToast('error','Penyimpanan browser penuh','Perubahan tidak tersimpan. Hapus file besar lalu coba lagi.');return false}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+const jsArg=v=>esc(JSON.stringify(v)); // aman dipakai di atribut onclick="..."
+function normEmail(e){return String(e||'').trim().toLowerCase()}
+const nowISO=()=>new Date().toISOString();
+function uniqStrings(a){return Array.isArray(a)?[...new Set(a.filter(s=>typeof s==='string'&&s.trim()).map(s=>s.trim()))]:[]}
+function validColor(c){return typeof c==='string'&&/^#[0-9a-f]{6}$/i.test(c)}
+function pretty(d){if(!d)return'-';const t=new Date(d+'T00:00:00');return isNaN(t)?'-':t.toLocaleDateString('id-ID',{day:'numeric',month:'short',year:'numeric'})}
+function fmtDT(iso){const t=new Date(iso);return isNaN(t)?'-':t.toLocaleString('id-ID',{day:'numeric',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'})}
+function formatToday(){const d=new Date(),days=['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'],months=['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER','DECEMBER'];return `${days[d.getDay()]}, ${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`}
+function initials(n){return String(n||'?').split(/[\s@.]+/).filter(Boolean).slice(0,2).map(w=>w[0].toUpperCase()).join('')||'?'}
+function opts(list,sel){const all=sel&&!list.includes(sel)?[sel,...list]:list;return all.map(o=>`<option ${o===sel?'selected':''}>${esc(o)}</option>`).join('')}
+const FULL=()=>({view:true,edit:true});
+function permPair(v){if(v&&typeof v==='object')return{view:!!(v.view||v.edit),edit:!!v.edit};return{view:!!v,edit:false}}
+function permLabel(p){p=permPair(p);return p.edit?'Lihat & Edit':p.view?'Lihat saja':'Tidak ada akses'}
+function permCode(p){p=permPair(p);return p.edit?2:p.view?1:0}
+function permFromCode(n){n=Number(n)||0;return{view:n>=1,edit:n>=2}}
+function b64urlEncode(str){const bytes=new TextEncoder().encode(str);let bin='';bytes.forEach(b=>bin+=String.fromCharCode(b));return btoa(bin).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function b64urlDecode(str){let b=String(str).trim().replace(/-/g,'+').replace(/_/g,'/');while(b.length%4)b+='=';const bin=atob(b),bytes=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)bytes[i]=bin.charCodeAt(i);return new TextDecoder().decode(bytes)}
+async function sha256Hex(text){const buf=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(text));return Array.from(new Uint8Array(buf)).map(b=>b.toString(16).padStart(2,'0')).join('')}
+function showToast(type,title,msg){let w=$('dtmToastWrap');if(!w){w=document.createElement('div');w.id='dtmToastWrap';w.className='dtm-toast-wrap';document.body.appendChild(w)}const t=document.createElement('div');t.className='dtm-toast '+(type||'');t.innerHTML='<strong>'+esc(title)+'</strong>'+esc(msg);w.appendChild(t);setTimeout(()=>t.remove(),6500)}
+async function copyText(text,label){try{await navigator.clipboard.writeText(text);showToast('success',label||'Link disalin',text)}catch(_){prompt('Salin link berikut:',text)}}
+function tagColor(text,kind){let pair=kind==='priority'?PRIORITY_COLORS[text]:null;if(!pair){let h=0;for(let i=0;i<String(text).length;i++)h=(h*31+String(text).charCodeAt(i))>>>0;pair=[PALETTE[h%PALETTE.length],['#647da9','#a35f83','#548b80','#a47743','#806aa9'][h%5]]}return pair}
+function v4Tag(text,kind){const [bg,fg]=tagColor(text,kind);return `<span class="tag" style="background:${bg};color:${fg}">${esc(text)}</span>`}
+function openModal(inner){$('modalRoot').innerHTML=`<div class="modal-backdrop" onclick="if(event.target===this)closeModal()"><div class="modal"><button class="close" onclick="closeModal()" aria-label="Tutup">✕</button>${inner}</div></div>`}
+function closeModal(){$('modalRoot').innerHTML=''}
+
+/* =====================================================================
+   3. DATA AWAL & STATE
+   ===================================================================== */
+const SEED_DESIGN=[
+{id:1,title:'Desain Banner Shopee 11.11',requester:'Nadia Putri',dept:'Marketing',type:'Marketplace Banner',priority:'High',deadline:'2026-11-19',status:'New Request',brief:'Buat banner promo 11.11 dengan nuansa cream dan hijau. Ukuran 1:1.',comments:2},
+{id:2,title:'Packaging Teh Herbal',requester:'Dimas',dept:'R&D',type:'Packaging',priority:'Urgent',deadline:'2026-11-20',status:'In Progress',brief:'Eksplorasi desain pouch teh herbal premium. Perlu mockup depan dan belakang.',comments:4},
+{id:3,title:'Feed Instagram Recruitment',requester:'Siska',dept:'HRD',type:'Social Media',priority:'Medium',deadline:'2026-11-21',status:'New Request',brief:'Konten lowongan kerja untuk Instagram feed 4:5.',comments:0},
+{id:4,title:'Revisi Brosur Produk',requester:'Rani',dept:'Sales',type:'Brochure',priority:'High',deadline:'2026-11-18',status:'Revision',brief:'Perbaiki informasi kontak dan komposisi produk sesuai catatan terbaru.',comments:3},
+{id:5,title:'Desain Label Produk Baru',requester:'Dimas',dept:'R&D',type:'Label',priority:'Medium',deadline:'2026-11-25',status:'Waiting Approval',brief:'Label botol ukuran 250 ml. Menunggu pengecekan tim R&D.',comments:1},
+{id:6,title:'Poster Internal Townhall',requester:'Maya',dept:'HRD',type:'Poster',priority:'Low',deadline:'2026-11-27',status:'Done',brief:'Poster digital untuk pengumuman townhall.',comments:2},
+{id:7,title:'Thumbnail Video Edukasi',requester:'Nadia Putri',dept:'Marketing',type:'Digital Asset',priority:'Medium',deadline:'2026-11-22',status:'In Progress',brief:'Thumbnail video edukasi produk untuk TikTok dan YouTube.',comments:1},
+{id:8,title:'Katalog Produk Distributor',requester:'Andi',dept:'Sales',type:'Catalog',priority:'High',deadline:'2026-11-24',status:'Revision',brief:'Perbarui daftar SKU dan foto produk terbaru.',comments:2}];
+const SEED_PRODUCTS=[
+{id:1,brand:'Melin',name:'Teh Melin',category:'Repeat',pic:'Admin Designer',deadline:'2026-11-20',status:'Proses produksi',note:'Repeat batch November'},
+{id:2,brand:'Xianva',name:'Xianva Tea',category:'Sample',pic:'R&D',deadline:'2026-11-22',status:'Evaluasi sample',note:'Evaluasi aroma dan rasa'},
+{id:3,brand:'Herbigreen',name:'Herbigreen Tea',category:'Produksi',pic:'Operasional',deadline:'2026-11-25',status:'Pengemasan',note:'Menunggu proses pengemasan'},
+{id:4,brand:'Delava',name:'Delava Fit-Ly',category:'Repeat',pic:'Admin Designer',deadline:'2026-11-28',status:'Menunggu jadwal produksi',note:'Konfirmasi jumlah repeat'},
+{id:5,brand:'New Brand',name:'Botanical Blend',category:'Sample',pic:'R&D',deadline:'2026-11-29',status:'Proses pembuatan sample',note:'Sample awal formula'},
+{id:6,brand:'Bimori',name:'Madu Bimori',category:'Produksi',pic:'Operasional',deadline:'2026-11-30',status:'Quality Control',note:'Pemeriksaan barang jadi'}];
+const SEED_TODOS=[
+{id:1,title:'Follow-up sample Xianva Tea',category:'Product',deadline:'2026-11-18',priority:'High',status:'In Progress'},
+{id:2,title:'Finalisasi banner Shopee',category:'Design',deadline:'2026-11-19',priority:'Urgent',status:'To Do'},
+{id:3,title:'Cek hasil repeat Teh Melin',category:'Product',deadline:'2026-11-20',priority:'Medium',status:'To Do'}];
+const SEED_ACTIVITIES=[['Request desain banner Shopee diterima','Marketing · 09.15'],['Status Packaging Teh Herbal diubah menjadi In Progress','R&D · Kemarin'],['Revisi Brosur Produk ditambahkan','Sales · Kemarin']];
+
+let designs,products,todos,departments,previewDept,activities,boards,access,requests,session,soundEnabled;
+let productView='board',currentPage='dashboard';
+
+function normalizeAccess(a){
+  const admin=a.role==='AdminACC';
+  return{email:normEmail(a.email),name:String(a.name||'').trim(),dept:String(a.dept||(Array.isArray(a.departments)?a.departments[0]:'')||'').trim(),
+    role:admin?'AdminACC':'Member',design:admin?FULL():permPair(a.design),products:admin?FULL():permPair(a.products),
+    prevPerms:a.prevPerms||null,status:['active','invited'].includes(a.status)?a.status:'draft',
+    invitedAt:a.invitedAt||null,activeAt:a.activeAt||null,updatedAt:a.updatedAt||new Date(0).toISOString()};
+}
+// Gabungkan data akses lama + daftar undangan lama menjadi satu daftar akun yang rapi.
+function mergeAccess(rawAccess,rawInvites){
+  const map=new Map();
+  (Array.isArray(rawAccess)?rawAccess:[]).forEach(a=>{if(!a||!a.email)return;const n=normalizeAccess(a);if(n.email!==OWNER_EMAIL&&!map.has(n.email))map.set(n.email,n)});
+  (Array.isArray(rawInvites)?rawInvites:[]).forEach(u=>{if(!u||!u.email)return;const email=normEmail(u.email);if(email===OWNER_EMAIL)return;let a=map.get(email);if(!a){a=normalizeAccess({email,name:u.name,dept:u.dept});map.set(email,a)}a.name=a.name||String(u.name||'');a.dept=a.dept||String(u.dept||'');if(u.status&&a.status==='draft'){a.status='invited';a.invitedAt=a.invitedAt||u.sentAt||a.updatedAt}});
+  return[...map.values()];
+}
+function loadBoards(){
+  const b={designStages:uniqStrings(load(K.designStages,null)),productTitles:loadObj(K.productTitles),productStages:loadObj(K.productStages),productCats:uniqStrings(load(K.productCats,null)),designColors:loadObj(K.designColors),productColors:loadObj(K.productColors)};
+  if(!b.designStages.length)b.designStages=DEFAULT_DESIGN_STAGES.slice();
+  if(!b.productCats.length){const fromTitles=Object.keys(b.productTitles);b.productCats=fromTitles.length?fromTitles:DEFAULT_PRODUCT_CATS.slice()}
+  b.productCats.forEach(c=>{if(!b.productTitles[c])b.productTitles[c]=DEFAULT_PRODUCT_TITLES[c]||c;const st=uniqStrings(b.productStages[c]);b.productStages[c]=st.length?st:(DEFAULT_PRODUCT_STAGES[c]||NEW_BOARD_STAGES).slice()});
+  ['designColors','productColors'].forEach(k=>Object.keys(b[k]).forEach(x=>{if(!validColor(b[k][x]))delete b[k][x]}));
+  return b;
+}
+function loadState(){
+  designs=loadArr(K.design,SEED_DESIGN).filter(x=>x&&typeof x==='object');
+  products=loadArr(K.products,SEED_PRODUCTS).filter(x=>x&&typeof x==='object');
+  todos=loadArr(K.todos,SEED_TODOS).filter(x=>x&&typeof x==='object');
+  departments=uniqStrings(load(K.departments,null));if(!departments.length)departments=DEFAULT_DEPARTMENTS.slice();
+  const pd=load(K.previewDept,null);previewDept=typeof pd==='string'&&pd?pd:'Designer';
+  activities=loadArr(K.activities,SEED_ACTIVITIES).filter(a=>Array.isArray(a)).slice(0,30);
+  boards=loadBoards();
+  access=mergeAccess(load(K.access,null),load(K.invites,null));
+  requests=loadArr(K.requests,[]).filter(r=>r&&r.email);
+  session=load(K.session,null);
+  if(session&&(typeof session!=='object'||(session.type==='owner'&&normEmail(session.email)!==OWNER_EMAIL)||!['owner','member'].includes(session.type)))session=null;
+  soundEnabled=localStorage.getItem(K.sound)!=='false';
+  // Integritas: setiap task harus berada di kolom/board yang masih ada.
+  designs.forEach(x=>{if(!x.createdAt)x.createdAt=nowISO();if(!boards.designStages.includes(x.status))x.status=boards.designStages[0]});
+  products.forEach(p=>{if(!p.createdAt)p.createdAt=nowISO();if(!boards.productCats.includes(p.category))p.category=boards.productCats[0];const st=stagesOf(p.category);if(!st.includes(p.status))p.status=st[0]});
+}
+function saveData(){store(K.design,designs);store(K.products,products);store(K.todos,todos)}
+function saveBoards(){store(K.designStages,boards.designStages);store(K.productTitles,boards.productTitles);store(K.productStages,boards.productStages);store(K.productCats,boards.productCats);store(K.designColors,boards.designColors);store(K.productColors,boards.productColors)}
+function saveAccess(){store(K.access,access)}
+function saveRequests(){store(K.requests,requests)}
+function saveDepartments(){store(K.departments,departments)}
+function saveSession(){if(session)store(K.session,session);else localStorage.removeItem(K.session)}
+function logActivity(text){activities.unshift([text,currentActor()+' · '+new Date().toLocaleString('id-ID',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})]);activities=activities.slice(0,30);store(K.activities,activities)}
+function productTitle(c){return boards.productTitles[c]||c}
+function stagesOf(c){return boards.productStages[c]||[]}
+
+/* =====================================================================
+   4. ROLE & HAK AKSES
+   ===================================================================== */
+function isOwner(){return !!(session&&session.type==='owner'&&normEmail(session.email)===OWNER_EMAIL)}
+function isMember(){return !!(session&&session.type==='member'&&session.email)}
+function findAccess(email){email=normEmail(email);return access.find(a=>a.email===email)||null}
+function myAccess(){return isMember()?findAccess(session.email):null}
+function can(mod,kind='view'){if(isOwner())return true;const a=myAccess();if(!a)return false;const p=permPair(a[mod]);return kind==='edit'?p.edit:p.view}
+function roleKind(a){return a&&a.role==='AdminACC'?'admin':'member'}
+function myRoleKind(){return isOwner()?'owner':isMember()?roleKind(myAccess()):'guest'}
+function myDept(){return isMember()?((myAccess()&&myAccess().dept)||session.dept||''):''}
+function roleText(kind,dept){return{owner:'OWNER ADMIN',admin:'ADMIN (ACC)',member:'ANGGOTA · '+(dept||'Umum'),guest:'TAMU'}[kind]}
+function roleBadge(kind,dept){return `<span class="role-badge ${kind}">${esc(roleText(kind,dept))}</span>`}
+function myBadge(){return roleBadge(myRoleKind(),myDept())}
+function currentActor(){return isOwner()?OWNER_NAME:isMember()?(session.name||session.email):'Tamu'}
+function requireEdit(mod){if(can(mod,'edit'))return true;showToast('error','Akses terbatas','Kamu tidak memiliki izin edit untuk '+MODULES[mod]+'. Minta akses edit ke Owner Admin.');return false}
+function requireOwner(){if(isOwner())return true;showToast('error','Khusus Owner Admin','Settings & kontrol akses hanya bisa dibuka oleh '+OWNER_EMAIL+'.');return false}
+function canOpenPage(p){if(p==='settings')return isOwner();if(p==='design')return can('design','view');if(p==='products')return can('products','view');return true}
+
+/* =====================================================================
+   5. URL PUBLIK & LINK SINGKAT (?inv= / ?req=)
+   ===================================================================== */
+function isPrivateHost(host){host=String(host||'').toLowerCase();const first=host.split('.')[0];return host==='app.netlify.com'||host==='localhost'||host.endsWith('.local')||/^(127\.|10\.|192\.168\.|0\.0\.0\.0)/.test(host)||host.startsWith('[')||(first.includes('--')&&!first.startsWith('xn--'))}
+function normalizeBaseUrl(raw){
+  let u;try{u=new URL(String(raw||'').trim())}catch(_){throw new Error('Format URL tidak valid. Contoh: '+DEFAULT_PUBLIC_BASE)}
+  if(u.protocol!=='https:')throw new Error('Gunakan URL publik yang diawali https://');
+  if(isPrivateHost(u.hostname))throw new Error('Ini terlihat seperti URL preview/privat (deploy preview, permalink, atau localhost). Gunakan domain publik utama.');
+  u.search='';u.hash='';u.username='';u.password='';u.pathname=u.pathname.replace(/\/index\.html?$/i,'/');if(!u.pathname.endsWith('/'))u.pathname+='/';
+  return u.href;
+}
+function getPublicBase(){const s=load(K.publicBase,null);if(s){try{return normalizeBaseUrl(s)}catch(_){}}return DEFAULT_PUBLIC_BASE}
+// Format undangan ringkas: [versi, email, nama, dept, izinDesign, izinProduk, adminACC, waktu(base36)]
+function encodeInvite(a){const t=Math.floor(Date.parse(a.updatedAt||nowISO())/1000);return b64urlEncode(JSON.stringify([2,a.email,a.name||'',a.dept||'',permCode(a.design),permCode(a.products),a.role==='AdminACC'?1:0,t.toString(36)]))}
+function decodeInvite(code){
+  const raw=JSON.parse(b64urlDecode(code));
+  if(Array.isArray(raw)&&raw[0]===2)return{email:normEmail(raw[1]),name:String(raw[2]||'').trim(),dept:String(raw[3]||'').trim(),design:permFromCode(raw[4]),products:permFromCode(raw[5]),admin:raw[6]===1,iat:new Date((parseInt(raw[7],36)||0)*1000).toISOString()};
+  if(raw&&typeof raw==='object'&&raw.email)return{email:normEmail(raw.email),name:String(raw.name||'').trim(),dept:String(raw.dept||'').trim(),design:permPair(raw.design),products:permPair(raw.products),admin:false,iat:raw.iat||nowISO()}; // link lama ?invite=
+  throw new Error('format');
+}
+function inviteLinkFor(a){return getPublicBase()+'?inv='+encodeInvite(a)}
+function encodeRequest(r){return b64urlEncode(JSON.stringify([1,r.email,r.name||'',r.dept||'',permCode(r.design),permCode(r.products),r.admin?1:0,String(r.note||'').slice(0,240),Math.floor(Date.parse(r.at)/1000).toString(36)]))}
+function decodeRequest(code){const x=JSON.parse(b64urlDecode(code));if(!Array.isArray(x)||x[0]!==1)throw new Error('format');return{email:normEmail(x[1]),name:String(x[2]||'').trim(),dept:String(x[3]||'').trim(),design:permFromCode(x[4]),products:permFromCode(x[5]),admin:x[6]===1,note:String(x[7]||'').slice(0,240),at:new Date((parseInt(x[8],36)||0)*1000).toISOString()}}
+function requestLinkFor(r){return getPublicBase()+'?req='+encodeRequest(r)}
+
+// Saat link undangan dibuka: departemen, sapaan, dan izin modul langsung diterapkan.
+function applyInvite(code){
+  let d;try{d=decodeInvite(code)}catch(_){return['error','Link undangan tidak valid','Minta Owner Admin mengirim ulang undangan.']}
+  if(!d.email||d.email===OWNER_EMAIL)return['error','Link undangan tidak valid','Undangan tidak dapat digunakan untuk akun ini.'];
+  if(isOwner()&&!confirm('Buka link undangan sebagai '+(d.name||d.email)+'? Sesi Owner Admin di browser ini akan keluar.'))return null;
+  if(d.dept&&!departments.includes(d.dept)){departments.push(d.dept);saveDepartments()}
+  const incoming={name:d.name||d.email,dept:d.dept,role:d.admin?'AdminACC':'Member',design:d.admin?FULL():d.design,products:d.admin?FULL():d.products,updatedAt:d.iat};
+  let a=findAccess(d.email);
+  if(!a){a=normalizeAccess({email:d.email,...incoming});access.push(a)}
+  else if(new Date(a.updatedAt||0)<new Date(d.iat))Object.assign(a,incoming); // link lebih baru → pakai akses terbaru
+  else{a.name=a.name||incoming.name;a.dept=a.dept||incoming.dept} // perubahan Owner yang lebih baru tetap berlaku
+  a.status='active';a.activeAt=a.activeAt||nowISO();a.invitedAt=a.invitedAt||d.iat;saveAccess();
+  session={type:'member',email:a.email,name:a.name||d.email,dept:a.dept,joinedAt:nowISO()};saveSession();
+  return['success','Good morning, '+(a.dept||'Team')+' 👋','Selamat datang, '+session.name+'! Departemen, sapaan, dan akses modul sudah diterapkan otomatis.'];
+}
+function importRequest(code){
+  let r;try{r=decodeRequest(code)}catch(_){showToast('error','Link permintaan tidak valid','Pastikan link disalin lengkap dari email anggota.');return false}
+  if(!r.email||r.email===OWNER_EMAIL){showToast('error','Link permintaan tidak valid','Permintaan ini tidak dapat diproses.');return false}
+  if(requests.some(x=>x.email===r.email&&x.at===r.at)){showToast('','Permintaan sudah ada','Permintaan dari '+(r.name||r.email)+' sudah tercatat.');showPage('settings');return true}
+  requests=requests.filter(x=>!(x.email===r.email&&x.status==='pending'));
+  requests.unshift({id:'r'+Date.now().toString(36)+Math.random().toString(36).slice(2,6),...r,status:'pending',via:'link'});saveRequests();
+  const a=findAccess(r.email);if(a&&a.status!=='active'){a.status='active';a.activeAt=a.activeAt||r.at;saveAccess()}
+  showToast('success','Permintaan akses diterima','Tinjau dan ACC permintaan '+(r.name||r.email)+' di Settings.');showPage('settings');return true;
+}
+function consumeUrl(){
+  const params=new URLSearchParams(location.search);const inv=params.get('inv')||params.get('invite'),req=params.get('req');
+  if(!inv&&!req)return null;
+  ['inv','invite','req'].forEach(k=>params.delete(k));
+  try{history.replaceState(null,'',location.pathname+(params.toString()?'?'+params:'')+location.hash)}catch(_){}
+  if(inv)return applyInvite(inv);
+  if(isOwner()){importRequest(req);return null}
+  try{sessionStorage.setItem(PENDING_REQ_KEY,req)}catch(_){}
+  return['','Link permintaan akses','Masuk sebagai Owner Admin untuk meninjau dan meng-ACC permintaan ini.'];
+}
+function importStashedRequest(){let code=null;try{code=sessionStorage.getItem(PENDING_REQ_KEY);sessionStorage.removeItem(PENDING_REQ_KEY)}catch(_){}if(code&&isOwner())importRequest(code)}
+
+/* =====================================================================
+   6. NAVIGASI & TAMPILAN BERDASARKAN ROLE
+   ===================================================================== */
+function showPage(p){
+  if(!PAGE_TITLES[p])p='dashboard';
+  if(!canOpenPage(p)){if(p==='settings')requireOwner();else showToast('error','Akses terbatas','Modul ini belum diizinkan untuk akunmu. Minta akses ke Owner Admin.');p='dashboard'}
+  currentPage=p;renderAll();
+}
+document.getElementById('nav').addEventListener('click',e=>{const b=e.target.closest('button[data-page]');if(b)showPage(b.dataset.page)});
+function applyAccessUI(){
+  const owner=isOwner(),member=isMember(),name=currentActor();
+  ['sideAvatar','pillAvatar'].forEach(id=>$(id).textContent=initials(name));
+  ['sideName','pillName'].forEach(id=>$(id).textContent=name);
+  $('sideRole').innerHTML=myBadge();$('pillRole').innerHTML=myBadge();$('settingsBadge').innerHTML=owner?roleBadge('owner'):'';
+  $('authBtn').textContent=owner||member?'Keluar':'Masuk';
+  $('requestAccessBtn').classList.toggle('hidden',!member);
+  document.querySelectorAll('#nav button[data-page]').forEach(b=>b.classList.toggle('hidden',!canOpenPage(b.dataset.page)));
+  const de=can('design','edit'),pe=can('products','edit');
+  $('designCreateBtn').classList.toggle('hidden',!de);$('productCreateBtn').classList.toggle('hidden',!pe);
+  $('designLock').classList.toggle('hidden',de||!can('design','view'));$('productLock').classList.toggle('hidden',pe||!can('products','view'));
+  $('dashProductsBtn').classList.toggle('hidden',!can('products','view'));
+  $('dashCreateBtn').textContent=de?'＋ Buat Request / Task':'＋ Tambah To-Do';
+  if(!canOpenPage(currentPage))currentPage='dashboard';
+  document.querySelectorAll('.page').forEach(x=>x.classList.toggle('hidden',x.id!==currentPage));
+  document.querySelectorAll('#nav button').forEach(b=>b.classList.toggle('active',b.dataset.page===currentPage));
+  $('crumb').textContent=PAGE_TITLES[currentPage];
+}
+function renderAll(){applyAccessUI();renderFilters();renderDashboard();renderDesign();renderProducts();renderTodos();renderCalendar();renderReports();renderSettings()}
+function renderFilters(){
+  const f=$('deptFilter'),v=f.value;f.innerHTML='<option value="">Semua departemen</option>'+departments.map(d=>`<option ${v===d?'selected':''}>${esc(d)}</option>`).join('');
+  const c=$('productCategory'),cv=boards.productCats.includes(c.value)?c.value:'';c.innerHTML='<option value="">Semua board</option>'+boards.productCats.map(k=>`<option value="${esc(k)}" ${cv===k?'selected':''}>${esc(productTitle(k))}</option>`).join('');
+}
+
+/* =====================================================================
+   7. DASHBOARD & SAPAAN
+   ===================================================================== */
+const DAILY_QUOTES=['Mulai dari satu langkah kecil, lalu lanjutkan dengan konsisten.','Ide baik tumbuh dari proses yang terus dijalani.','Fokus pada progres, bukan harus sempurna hari ini.','Kerjakan dengan tenang, hasil baik mengikuti proses.','Setiap detail kecil membawa pekerjaan lebih dekat ke tujuan.','Hari baru, kesempatan baru untuk berkarya.','Konsistensi membuat hal sederhana menjadi berarti.'];
+function greetingDept(){if(isMember())return myDept()||'Team';if(isOwner())return previewDept||'Designer';return 'Tamu'}
+function renderGreeting(){
+  $('todayLabel').textContent=formatToday();
+  $('greeting').textContent='Good morning, '+greetingDept()+' 👋';
+  const day=Math.floor(new Date().setHours(0,0,0,0)/86400000);$('dailyQuote').textContent='“'+DAILY_QUOTES[day%DAILY_QUOTES.length]+'”';
+  let meta;
+  if(isOwner())meta=`${roleBadge('owner')}<span class="muted" style="font-size:11px">${esc(OWNER_NAME)} · akses penuh semua modul & Settings</span>`;
+  else if(isMember()){const a=myAccess()||{};meta=`${myBadge()}<span class="muted" style="font-size:11px">${esc(currentActor())}</span>`+Object.keys(MODULES).map(m=>v4Tag(MODULES[m]+': '+permLabel(a[m]))).join('')}
+  else meta=`${roleBadge('guest')}<span class="muted" style="font-size:11px">Masuk sebagai Owner Admin, atau buka link undangan dari email untuk mengakses modul.</span>`;
+  $('greetingMeta').innerHTML=meta;
+}
+function renderDashboard(){
+  renderGreeting();
+  const dv=can('design','view'),pv=can('products','view');
+  $('statDesign').textContent=dv?designs.length:'—';
+  $('statProcess').textContent=dv?designs.filter(x=>/progress/i.test(x.status)).length:'—';
+  $('statRevision').textContent=dv?designs.filter(x=>/revis/i.test(x.status)).length:'—';
+  $('statProduct').textContent=pv?products.length:'—';
+  $('priorityList').innerHTML=[...todos].filter(t=>t.status!=='Done').sort((a,b)=>String(a.deadline||'').localeCompare(String(b.deadline||''))).slice(0,4).map(t=>`<div class="mini-task"><div><strong>${esc(t.title)}</strong><small>Deadline ${pretty(t.deadline)}</small></div>${v4Tag(t.priority,'priority')}</div>`).join('')||'<div class="empty">Belum ada task prioritas.</div>';
+  $('activityList').innerHTML=(dv||pv?activities:[['Belum ada aktivitas','Akses modul belum diberikan']]).slice(0,6).map(a=>`<div class="activity-row"><span class="dot"></span><div><strong>${esc(a[0])}</strong><p>${esc(a[1])}</p></div></div>`).join('')||'<div class="empty">Belum ada aktivitas.</div>';
+  $('dashboardProducts').innerHTML=pv?(products.slice(0,4).map(p=>`<tr><td><b>${esc(p.brand)}</b><div class="muted">${esc(p.name)}</div></td><td>${esc(productTitle(p.category))}</td><td>${v4Tag(p.status)}</td><td>${pretty(p.deadline)}</td></tr>`).join('')||'<tr><td colspan="4" class="empty">Belum ada produk.</td></tr>'):'<tr><td colspan="4" class="empty">Kamu belum memiliki akses Product Management.</td></tr>';
+}
+
+/* =====================================================================
+   8. DRAG & DROP (hanya aktif bila punya izin edit)
+   ===================================================================== */
+function allowDrop(e){e.preventDefault();e.currentTarget.classList.add('drop-hover')}
+function leaveDrop(e){if(!e.currentTarget.contains(e.relatedTarget))e.currentTarget.classList.remove('drop-hover')}
+function dragItem(e,kind,id){e.dataTransfer.setData('text/plain',kind+':'+id);e.dataTransfer.effectAllowed='move'}
+function readDrag(e,kind){e.preventDefault();e.currentTarget.classList.remove('drop-hover');const s=String(e.dataTransfer.getData('text/plain')),i=s.indexOf(':');return s.slice(0,i)===kind?s.slice(i+1):null}
+function dropDesign(e,i){const id=readDrag(e,'design');if(id===null||!requireEdit('design'))return;const t=designs.find(x=>String(x.id)===id),st=boards.designStages[i];if(!t||!st||t.status===st)return;t.status=st;t.updatedAt=nowISO();logActivity('Task dipindahkan ke '+st+': '+t.title);saveData();renderAll()}
+function dropProduct(e,i){const id=readDrag(e,'product');if(id===null||!requireEdit('products'))return;const p=products.find(x=>String(x.id)===id),c=boards.productCats[i];if(!p||!c||p.category===c)return;p.category=c;if(!stagesOf(c).includes(p.status))p.status=stagesOf(c)[0];p.updatedAt=nowISO();logActivity('Produk dipindahkan ke '+productTitle(c)+': '+p.brand+' · '+p.name);saveData();renderAll()}
+const dropAttrs=(fn,i)=>` ondragover="allowDrop(event)" ondragleave="leaveDrop(event)" ondrop="${fn}(event,${i})"`;
+
+/* =====================================================================
+   9. DESIGN REQUEST
+   ===================================================================== */
+function renderDesign(){
+  const q=($('designSearch').value||'').trim().toLowerCase(),d=$('deptFilter').value||'',ed=can('design','edit');
+  const hay=x=>(x.title+' '+x.requester+' '+x.dept+' '+x.type).toLowerCase();
+  let list=designs.filter(x=>(!q||hay(x).includes(q))&&(!d||x.dept===d));
+  if(q)list.sort((a,b)=>(hay(a).startsWith(q)?0:1)-(hay(b).startsWith(q)?0:1));
+  $('designBoard').innerHTML=boards.designStages.map((st,i)=>{
+    const bg=boards.designColors[st]||PALETTE[i%PALETTE.length],items=list.filter(x=>x.status===st);
+    const tools=ed?`<input class="board-color" type="color" title="Ubah warna kolom" value="${bg}" onchange="setBoardColor('design',${i},this.value)"><button class="secondary col-btn" title="Ubah judul kolom" onclick="renameDesignStage(${i})">✎</button><button class="secondary col-btn danger" title="Hapus kolom/board" onclick="deleteDesignStage(${i})">🗑</button>`:'';
+    return `<div class="column" style="background:${bg};border-color:${bg}"${ed?dropAttrs('dropDesign',i):''}><div class="colhead"><span>${esc(st)}</span><span class="toolbar">${tools}<span class="count">${items.length}</span></span></div>${items.map(x=>designCard(x,ed)).join('')||'<div class="empty">Belum ada task</div>'}</div>`;
+  }).join('')+(ed?`<div class="column" style="display:grid;place-items:center;min-height:100px"><button class="secondary" onclick="addDesignStage()">＋ Tambah kolom</button></div>`:'');
+}
+function designCard(x,ed){const id=jsArg(x.id);return `<div class="task" draggable="${ed}"${ed?` ondragstart="dragItem(event,'design',${id})"`:''} onclick="openDetail(${id})">${v4Tag(x.priority,'priority')} ${v4Tag(x.type)}<h3>${esc(x.title)}</h3><p>${esc(x.dept)}</p><div class="taskfoot"><span class="person"><span class="tiny-avatar">${esc((x.requester||'?').slice(0,1))}</span>${esc(x.requester||'')}</span><span>◷ ${pretty(x.deadline)}</span></div><div class="muted" style="font-size:10px;margin-top:6px">💬 ${(x.chat||[]).length} pesan</div><button class="secondary" style="margin-top:8px;padding:6px 10px;font-size:11px;width:100%" onclick="event.stopPropagation();openDetail(${id})">${ed?'💬 Buka Chat':'👁 Lihat detail'}</button></div>`}
+function askStageName(label,current,existing){const n=(prompt(label,current||'')||'').trim();if(!n||n===current)return null;if(existing.some(s=>s.toLowerCase()===n.toLowerCase())){showToast('error','Nama sudah dipakai','Gunakan nama kolom/board yang berbeda.');return null}return n}
+function addDesignStage(){if(!requireEdit('design'))return;const n=askStageName('Nama kolom/status baru:','',boards.designStages);if(!n)return;boards.designStages.push(n);saveBoards();logActivity('Kolom Design Request ditambahkan: '+n);renderAll()}
+function renameDesignStage(i){if(!requireEdit('design'))return;const old=boards.designStages[i];if(old===undefined)return;const n=askStageName('Ubah judul kolom board:',old,boards.designStages.filter((_,j)=>j!==i));if(!n)return;boards.designStages[i]=n;if(boards.designColors[old]){boards.designColors[n]=boards.designColors[old];delete boards.designColors[old]}designs.forEach(x=>{if(x.status===old)x.status=n});saveBoards();saveData();renderAll()}
+function deleteDesignStage(i){
+  if(!requireEdit('design'))return;const stages=boards.designStages,name=stages[i];if(name===undefined)return;
+  if(stages.length<=1){showToast('error','Tidak bisa dihapus','Minimal harus ada satu kolom di Design Request.');return}
+  const target=i===0?stages[1]:stages[0],moving=designs.filter(x=>x.status===name);
+  if(!confirm(`Hapus kolom "${name}"?\n\n`+(moving.length?`${moving.length} task di dalamnya akan dipindahkan dengan aman ke kolom pertama "${target}".`:'Kolom ini kosong.')))return;
+  moving.forEach(x=>{x.status=target;x.updatedAt=nowISO()});stages.splice(i,1);delete boards.designColors[name];
+  saveBoards();saveData();logActivity('Kolom Design Request dihapus: '+name+(moving.length?' ('+moving.length+' task → '+target+')':''));renderAll();
+  showToast('success','Kolom dihapus',moving.length?moving.length+' task dipindahkan ke "'+target+'".':'Kolom "'+name+'" sudah dihapus.');
+}
+function openDetail(id){
+  const x=designs.find(a=>String(a.id)===String(id));if(!x)return;x.chat=x.chat||[];
+  const ed=can('design','edit'),dis=ed?'':' disabled',aid=jsArg(x.id);
+  openModal(`<div class="eyebrow">DESIGN REQUEST #${esc(x.id)}</div>
+  <div class="field"><label>Judul request</label><input id="editDesignTitle" value="${esc(x.title)}"${dis}></div>
+  <p class="modal-sub" style="margin-top:8px">${esc(x.dept)} · Requester: ${esc(x.requester)}${x.refFile?' · 📎 '+esc(x.refFile):''}</p>
+  <div class="formgrid">
+    <div class="field"><label>Jenis</label><select id="editDesignType"${dis}>${opts(DESIGN_TYPES,x.type)}</select></div>
+    <div class="field"><label>Prioritas</label><select id="editDesignPriority"${dis}>${opts(PRIORITIES,x.priority)}</select></div>
+    <div class="field"><label>Status / kolom board</label><select id="detailStatus"${dis}>${opts(boards.designStages,x.status)}</select></div>
+    <div class="field"><label>Deadline</label><input type="date" id="editDesignDeadline" value="${esc(x.deadline||'')}"${dis}></div>
+    <div class="field full"><label>Brief</label><textarea id="editDesignBrief"${dis}>${esc(x.brief||'')}</textarea></div>
+  </div>
+  <div class="section-head" style="margin:15px 0 8px"><h2>💬 Chat dengan requester</h2><span id="designChatCount">${v4Tag(x.chat.length+' pesan')}</span></div>
+  <div class="chat-box" id="designChatBox">${chatHtml(x)}</div>
+  ${ed?`<div class="chat-compose" style="margin-top:9px"><textarea id="designChatInput" placeholder="Tulis pesan untuk requester..."></textarea><button class="primary" onclick="sendDesignChat(${aid})">Kirim</button></div>`:'<div class="v5-lock" style="margin-top:9px">🔒 Mode lihat saja — status, detail, hapus, dan chat request dikunci.</div>'}
+  <div class="modal-actions">${ed?`<button class="secondary danger" style="margin-right:auto" onclick="deleteDesign(${aid})">🗑 Hapus request</button>`:''}<button class="secondary" onclick="closeModal()">Tutup</button>${ed?`<button class="primary" onclick="saveDetail(${aid})">Simpan perubahan</button>`:''}</div>`);
+  const box=$('designChatBox');box.scrollTop=box.scrollHeight;
+}
+function chatHtml(x){return (x.chat||[]).map(m=>`<div class="chat-message"><small>${esc(m.sender||'Anggota tim')} · ${fmtDT(m.at)}</small>${esc(m.text)}</div>`).join('')||'<div class="muted" style="font-size:11px">Belum ada pesan. Mulai diskusi dengan requester di sini.</div>'}
+function saveDetail(id){
+  if(!requireEdit('design'))return;const x=designs.find(a=>String(a.id)===String(id));if(!x)return;
+  x.title=$('editDesignTitle').value.trim()||x.title;x.type=$('editDesignType').value;x.priority=$('editDesignPriority').value;
+  x.status=$('detailStatus').value;x.deadline=$('editDesignDeadline').value||x.deadline;x.brief=$('editDesignBrief').value.trim();x.updatedAt=nowISO();
+  logActivity('Update '+x.title+' → '+x.status);saveData();closeModal();renderAll();
+}
+function deleteDesign(id){if(!requireEdit('design'))return;const x=designs.find(a=>String(a.id)===String(id));if(!x||!confirm('Hapus request "'+x.title+'"? Tindakan ini tidak bisa dibatalkan.'))return;designs=designs.filter(a=>a!==x);logActivity('Request dihapus: '+x.title);saveData();closeModal();renderAll()}
+function sendDesignChat(id){
+  if(!requireEdit('design'))return;const x=designs.find(a=>String(a.id)===String(id)),input=$('designChatInput');if(!x||!input||!input.value.trim())return;
+  x.chat=x.chat||[];x.chat.push({sender:currentActor(),text:input.value.trim(),at:nowISO()});x.comments=(x.comments||0)+1;saveData();
+  input.value='';const box=$('designChatBox');box.innerHTML=chatHtml(x);box.scrollTop=box.scrollHeight;$('designChatCount').innerHTML=v4Tag(x.chat.length+' pesan');renderDesign();
+}
+
+/* =====================================================================
+   10. PRODUCT MANAGEMENT
+   ===================================================================== */
+function setProductView(v){productView=v;renderProducts()}
+function renderProducts(){
+  const cat=$('productCategory').value||'',q=($('productSearch').value||'').trim().toLowerCase(),ed=can('products','edit');
+  let list=products.filter(p=>(!cat||p.category===cat)&&(!q||(p.brand+' '+p.name+' '+productTitle(p.category)+' '+(p.pic||'')).toLowerCase().includes(q)));
+  if(q)list.sort((a,b)=>((a.brand+' '+a.name).toLowerCase().startsWith(q)?0:1)-((b.brand+' '+b.name).toLowerCase().startsWith(q)?0:1));
+  $('productBoard').classList.toggle('hidden',productView!=='board');$('productTable').classList.toggle('hidden',productView!=='table');
+  $('boardTab').classList.toggle('active',productView==='board');$('tableTab').classList.toggle('active',productView==='table');
+  if(productView==='table'){$('productRows').innerHTML=list.map(p=>`<tr onclick="openProduct(${jsArg(p.id)})" style="cursor:pointer"><td><b>${esc(p.brand)}</b><div class="muted">${esc(p.name)}</div></td><td>${esc(productTitle(p.category))}</td><td>${esc(p.pic||'')}</td><td>${pretty(p.deadline)}</td><td>${v4Tag(p.status)}</td></tr>`).join('')||'<tr><td colspan="5" class="empty">Produk tidak ditemukan</td></tr>';return}
+  const cats=cat?[cat]:boards.productCats;
+  $('productBoard').innerHTML=cats.map(c=>{
+    const i=boards.productCats.indexOf(c),bg=boards.productColors[c]||PALETTE[(i+3)%PALETTE.length],items=list.filter(p=>p.category===c);
+    const tools=ed?`<input class="board-color" type="color" title="Ubah warna board" value="${bg}" onchange="setBoardColor('product',${i},this.value)"><button class="secondary col-btn" title="Ubah judul board" onclick="renameProductBoard(${i})">✎</button><button class="secondary col-btn danger" title="Hapus board" onclick="deleteProductBoard(${i})">🗑</button>`:'';
+    return `<div class="column" style="background:${bg};border-color:${bg}"${ed?dropAttrs('dropProduct',i):''}><div class="colhead"><span>${esc(productTitle(c))}</span><span class="toolbar">${tools}<span class="count">${items.length}</span></span></div>${items.map(p=>{const id=jsArg(p.id);return `<div class="task" draggable="${ed}"${ed?` ondragstart="dragItem(event,'product',${id})"`:''} onclick="openProduct(${id})">${v4Tag(p.status)}<h3>${esc(p.brand)} · ${esc(p.name)}</h3><p>PIC: ${esc(p.pic||'-')}</p><div class="taskfoot"><span>${esc(p.note||'')}</span><span>◷ ${pretty(p.deadline)}</span></div>${(p.files||[]).length?`<div class="muted" style="font-size:10px;margin-top:6px">📎 ${p.files.length} file</div>`:''}</div>`}).join('')||'<div class="empty">Belum ada produk</div>'}</div>`;
+  }).join('')+(ed&&!cat?`<div class="column" style="display:grid;place-items:center;min-height:100px"><button class="secondary" onclick="addProductBoard()">＋ Tambah board</button></div>`:'');
+}
+function addProductBoard(){if(!requireEdit('products'))return;const n=askStageName('Nama board produk baru:','',boards.productCats.map(productTitle));if(!n)return;const key='b'+Date.now().toString(36);boards.productCats.push(key);boards.productTitles[key]=n;boards.productStages[key]=NEW_BOARD_STAGES.slice();saveBoards();logActivity('Board produk ditambahkan: '+n);renderAll()}
+function renameProductBoard(i){if(!requireEdit('products'))return;const c=boards.productCats[i];if(!c)return;const n=askStageName('Ubah judul board:',productTitle(c),boards.productCats.filter((_,j)=>j!==i).map(productTitle));if(!n)return;boards.productTitles[c]=n;saveBoards();renderAll()}
+function deleteProductBoard(i){
+  if(!requireEdit('products'))return;const cats=boards.productCats,c=cats[i];if(!c)return;
+  if(cats.length<=1){showToast('error','Tidak bisa dihapus','Minimal harus ada satu board di Product Management.');return}
+  const target=i===0?cats[1]:cats[0],name=productTitle(c),moving=products.filter(p=>p.category===c);
+  if(!confirm(`Hapus board "${name}"?\n\n`+(moving.length?`${moving.length} produk di dalamnya akan dipindahkan dengan aman ke board pertama "${productTitle(target)}".`:'Board ini kosong.')))return;
+  const tStages=stagesOf(target);moving.forEach(p=>{p.category=target;if(!tStages.includes(p.status))p.status=tStages[0];p.updatedAt=nowISO()});
+  cats.splice(i,1);delete boards.productTitles[c];delete boards.productStages[c];delete boards.productColors[c];
+  saveBoards();saveData();logActivity('Board produk dihapus: '+name+(moving.length?' ('+moving.length+' produk → '+productTitle(target)+')':''));renderAll();
+  showToast('success','Board dihapus',moving.length?moving.length+' produk dipindahkan ke "'+productTitle(target)+'".':'Board "'+name+'" sudah dihapus.');
+}
+function addProductStage(i){if(!requireEdit('products'))return;const c=boards.productCats[i];if(!c)return;const n=askStageName('Nama tahapan baru untuk '+productTitle(c)+':','',stagesOf(c));if(!n)return;boards.productStages[c].push(n);saveBoards();renderAll()}
+function renameProductStage(i,j){if(!requireEdit('products'))return;const c=boards.productCats[i],old=stagesOf(c)[j];if(old===undefined)return;const n=askStageName('Ubah nama tahapan:',old,stagesOf(c).filter((_,k)=>k!==j));if(!n)return;boards.productStages[c][j]=n;products.forEach(p=>{if(p.category===c&&p.status===old)p.status=n});saveBoards();saveData();renderAll()}
+function deleteProductStage(i,j){if(!requireEdit('products'))return;const c=boards.productCats[i],st=stagesOf(c),old=st[j];if(old===undefined)return;if(st.length<=1){showToast('error','Tidak bisa dihapus','Minimal satu tahapan per board.');return}const target=j===0?st[1]:st[0],moving=products.filter(p=>p.category===c&&p.status===old);if(!confirm(`Hapus tahapan "${old}"?`+(moving.length?`\n${moving.length} produk dipindahkan ke "${target}".`:'')))return;moving.forEach(p=>{p.status=target;p.updatedAt=nowISO()});st.splice(j,1);saveBoards();saveData();renderAll()}
+function setBoardColor(kind,i,color){
+  const mod=kind==='design'?'design':'products';if(!requireEdit(mod)||!validColor(color)){renderAll();return}
+  const key=kind==='design'?boards.designStages[i]:boards.productCats[i];if(key===undefined)return;
+  (kind==='design'?boards.designColors:boards.productColors)[key]=color;saveBoards();renderDesign();renderProducts();
+}
+function openProduct(id){
+  const p=products.find(x=>String(x.id)===String(id));if(!p)return;const ed=can('products','edit'),dis=ed?'':' disabled',aid=jsArg(p.id),files=p.files||[];
+  openModal(`<div class="eyebrow">${esc(productTitle(p.category))} · PRODUCT</div>
+  <div class="formgrid">
+    <div class="field"><label>Nama brand</label><input id="editProductBrand" value="${esc(p.brand)}"${dis}></div>
+    <div class="field"><label>Nama produk</label><input id="editProductName" value="${esc(p.name)}"${dis}></div>
+    <div class="field"><label>Board</label><select id="productCat"${dis}>${boards.productCats.map(c=>`<option value="${esc(c)}" ${c===p.category?'selected':''}>${esc(productTitle(c))}</option>`).join('')}</select></div>
+    <div class="field"><label>${ed?'Update status produk':'Status produk'}</label><select id="productStatus"${dis}>${opts(stagesOf(p.category),p.status)}</select></div>
+    <div class="field"><label>PIC</label><input id="editProductPic" value="${esc(p.pic||'')}"${dis}></div>
+    <div class="field"><label>Target selesai</label><input type="date" id="editProductDeadline" value="${esc(p.deadline||'')}"${dis}></div>
+    <div class="field full"><label>Catatan</label><textarea id="editProductNote"${dis}>${esc(p.note||'')}</textarea></div>
+  </div>
+  ${ed?`<div class="field" style="margin-top:14px"><label>Tambah file produk (bisa pilih banyak)</label><input type="file" id="productFiles" multiple accept=".pdf,.doc,.docx,.jpg,.jpeg,.png,.xls,.xlsx,.ppt,.pptx,.zip,.ai,.psd,.txt"><small class="muted">Kapasitas mengikuti ruang penyimpanan browser.</small></div>`:'<div class="v5-lock" style="margin-top:12px">🔒 Mode lihat saja — perubahan produk, status, hapus, dan upload file dikunci.</div>'}
+  <div class="detail-line"><b>File tersimpan (${files.length})</b>${files.map((f,i)=>`<div class="mini-task"><span>${esc(f.name)}</span><button class="secondary" onclick="downloadProductFile(${aid},${i})">Unduh</button></div>`).join('')||'Belum ada file.'}</div>
+  <div class="modal-actions">${ed?`<button class="secondary danger" style="margin-right:auto" onclick="deleteProduct(${aid})">🗑 Hapus produk</button>`:''}<button class="secondary" onclick="closeModal()">Tutup</button>${ed?`<button class="primary" onclick="saveProductDetail(${aid})">Simpan perubahan</button>`:''}</div>`);
+  if(ed)$('productCat').onchange=e=>{$('productStatus').innerHTML=opts(stagesOf(e.target.value),'')};
+}
+function saveProductDetail(id){
+  if(!requireEdit('products'))return;const p=products.find(x=>String(x.id)===String(id));if(!p)return;
+  p.brand=$('editProductBrand').value.trim()||p.brand;p.name=$('editProductName').value.trim()||p.name;
+  const c=$('productCat').value;if(boards.productCats.includes(c))p.category=c;
+  p.status=$('productStatus').value;if(!stagesOf(p.category).includes(p.status))p.status=stagesOf(p.category)[0];
+  p.pic=$('editProductPic').value.trim();p.deadline=$('editProductDeadline').value||p.deadline;p.note=$('editProductNote').value.trim();p.updatedAt=nowISO();
+  const chosen=Array.from($('productFiles').files||[]);const finish=()=>{logActivity('Update produk '+p.brand+' · '+p.name+' → '+p.status);saveData();closeModal();renderAll()};
+  if(!chosen.length){finish();return}
+  Promise.all(chosen.map(file=>new Promise((resolve,reject)=>{const r=new FileReader();r.onload=()=>resolve({name:file.name,type:file.type,size:file.size,data:r.result});r.onerror=reject;r.readAsDataURL(file)}))).then(items=>{p.files=(p.files||[]).concat(items);finish()}).catch(()=>showToast('error','Gagal membaca file','Coba lagi dengan ukuran file lebih kecil.'));
+}
+function deleteProduct(id){if(!requireEdit('products'))return;const p=products.find(x=>String(x.id)===String(id));if(!p||!confirm('Hapus produk "'+p.brand+' · '+p.name+'"? Tindakan ini tidak bisa dibatalkan.'))return;products=products.filter(x=>x!==p);logActivity('Produk dihapus: '+p.brand+' · '+p.name);saveData();closeModal();renderAll()}
+function downloadProductFile(id,i){const f=(products.find(p=>String(p.id)===String(id))?.files||[])[i];if(!f)return;const a=document.createElement('a');a.href=f.data;a.download=f.name;a.click()}
+
+/* =====================================================================
+   11. FORM TAMBAH (Design / Produk / To-Do)
+   ===================================================================== */
+function openCreate(type){
+  if(type==='design'&&!requireEdit('design'))return;if(type==='product'&&!requireEdit('products'))return;
+  const title={design:'Buat Design Request',product:'Tambah Produk / Brand',todo:'Tambah To-Do'}[type];let body='';
+  if(type==='design'){const dd=myDept();body=`<div class="field"><label>Judul request *</label><input name="title" required placeholder="Contoh: Desain banner promo"></div><div class="field"><label>Requester *</label><input name="requester" required placeholder="Nama peminta" value="${esc(isMember()?session.name:'')}"></div><div class="field"><label>Departemen</label><select name="dept">${departments.map(d=>`<option ${d===dd?'selected':''}>${esc(d)}</option>`).join('')}</select></div><div class="field"><label>Jenis desain</label><select name="type">${opts(DESIGN_TYPES,'Social Media')}</select></div><div class="field"><label>Prioritas</label><select name="priority">${opts(PRIORITIES,'Medium')}</select></div><div class="field"><label>Deadline</label><input type="date" name="deadline" required></div><div class="field full"><label>Brief / kebutuhan desain</label><textarea name="brief" placeholder="Jelaskan kebutuhan, ukuran, copywriting, referensi..."></textarea></div><div class="field full"><label>Referensi / file (nama file dicatat)</label><input type="file" name="file"></div>`}
+  if(type==='product')body=`<div class="field"><label>Brand *</label><input name="brand" required placeholder="Nama brand"></div><div class="field"><label>Nama produk *</label><input name="name" required placeholder="Nama produk"></div><div class="field"><label>Board</label><select name="category" id="newProductCat">${boards.productCats.map(c=>`<option value="${esc(c)}">${esc(productTitle(c))}</option>`).join('')}</select></div><div class="field"><label>Status awal</label><select name="status" id="newProductStatus"></select></div><div class="field"><label>PIC</label><input name="pic" placeholder="Nama PIC / departemen"></div><div class="field"><label>Target selesai</label><input type="date" name="deadline" required></div><div class="field full"><label>Catatan</label><textarea name="note" placeholder="Catatan proses, jumlah produksi, dan lain-lain"></textarea></div>`;
+  if(type==='todo')body=`<div class="field full"><label>Nama task *</label><input name="title" required placeholder="Apa yang perlu dikerjakan?"></div><div class="field"><label>Kategori</label><select name="category"><option>Design</option><option>Product</option><option>Administrasi</option><option>Other</option></select></div><div class="field"><label>Deadline</label><input type="date" name="deadline" required></div><div class="field"><label>Prioritas</label><select name="priority">${opts(PRIORITIES,'Medium')}</select></div>`;
+  openModal(`<h2>${title}</h2><p class="modal-sub">Isi informasi berikut untuk menambahkan data ke workspace.</p><form id="createForm"><div class="formgrid">${body}</div><div class="modal-actions"><button type="button" class="secondary" onclick="closeModal()">Batal</button><button class="primary" type="submit">Simpan</button></div></form>`);
+  if(type==='product'){const cat=$('newProductCat'),st=$('newProductStatus'),fill=()=>{st.innerHTML=opts(stagesOf(cat.value),'')};cat.onchange=fill;fill()}
+  $('createForm').onsubmit=e=>{
+    e.preventDefault();const f=new FormData(e.target),v={};f.forEach((val,k)=>{if(typeof val==='string')v[k]=val.trim()});const created=nowISO();
+    if(type==='design'){if(!requireEdit('design'))return;const file=f.get('file');designs.unshift({id:Date.now(),title:v.title,requester:v.requester,dept:v.dept,type:v.type,priority:v.priority,deadline:v.deadline,brief:v.brief,refFile:file&&file.size?file.name:'',status:boards.designStages[0],comments:0,chat:[],createdAt:created});logActivity('Request baru: '+v.title+' · '+v.dept)}
+    if(type==='product'){if(!requireEdit('products'))return;products.unshift({id:Date.now(),brand:v.brand,name:v.name,category:v.category,status:v.status||stagesOf(v.category)[0],pic:v.pic,deadline:v.deadline,note:v.note,files:[],createdAt:created});logActivity('Produk baru: '+v.brand+' · '+v.name)}
+    if(type==='todo')todos.unshift({id:Date.now(),title:v.title,category:v.category,deadline:v.deadline,priority:v.priority,status:'To Do',createdAt:created});
+    saveData();closeModal();renderAll();
+  };
+}
+
+/* =====================================================================
+   12. TO-DO, KALENDER, REPORTS
+   ===================================================================== */
+function renderTodos(){$('todoRows').innerHTML=todos.map(t=>`<tr><td><b>${esc(t.title)}</b></td><td>${esc(t.category)}</td><td>${pretty(t.deadline)}</td><td>${v4Tag(t.priority,'priority')}</td><td><select class="select" onchange="updateTodo(${jsArg(t.id)},this.value)">${opts(['To Do','In Progress','Done'],t.status)}</select></td><td><button class="secondary" onclick="deleteTodo(${jsArg(t.id)})">Hapus</button></td></tr>`).join('')||'<tr><td colspan="6" class="empty">Belum ada to-do.</td></tr>'}
+function updateTodo(id,s){const t=todos.find(x=>String(x.id)===String(id));if(t){t.status=s;saveData();renderAll()}}
+function deleteTodo(id){if(confirm('Hapus to-do ini?')){todos=todos.filter(t=>String(t.id)!==String(id));saveData();renderAll()}}
+function renderCalendar(){
+  const rows=[...(can('design','view')?designs:[]).map(x=>({title:x.title,type:'Design',pic:x.requester,deadline:x.deadline,status:x.status})),...(can('products','view')?products:[]).map(x=>({title:x.brand+' · '+x.name,type:productTitle(x.category),pic:x.pic,deadline:x.deadline,status:x.status})),...todos.map(x=>({title:x.title,type:'Personal',pic:currentActor(),deadline:x.deadline,status:x.status}))].sort((a,b)=>String(a.deadline||'').localeCompare(String(b.deadline||'')));
+  $('calendarRows').innerHTML=rows.map(x=>`<tr><td><b>${esc(x.title)}</b></td><td>${esc(x.type)}</td><td>${esc(x.pic||'-')}</td><td>${pretty(x.deadline)}</td><td>${v4Tag(x.status)}</td></tr>`).join('')||'<tr><td colspan="5" class="empty">Belum ada deadline.</td></tr>';
+}
+function renderReports(){
+  const mode=$('reportMode').value||'realtime',monthEl=$('reportMonth'),yearEl=$('reportYear'),now=new Date();
+  const all=[...(can('design','view')?designs:[]).map(x=>({...x,_kind:'design'})),...(can('products','view')?products:[]).map(x=>({...x,_kind:'product'})),...todos.map(x=>({...x,_kind:'todo'}))];
+  const years=[...new Set(all.map(x=>new Date(x.createdAt||Date.now()).getFullYear()).concat(now.getFullYear()))].sort((a,b)=>b-a);
+  const oldY=yearEl.value;yearEl.innerHTML=years.map(y=>`<option value="${y}">${y}</option>`).join('');yearEl.value=years.includes(Number(oldY))?oldY:String(now.getFullYear());
+  if(!monthEl.options.length){monthEl.innerHTML=['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'].map((m,i)=>`<option value="${i}">${m}</option>`).join('');monthEl.value=String(now.getMonth())}
+  const y=Number(yearEl.value),m=Number(monthEl.value);monthEl.classList.toggle('hidden',mode!=='month');yearEl.classList.toggle('hidden',mode==='realtime');
+  const filtered=all.filter(x=>{const d=new Date(x.createdAt||Date.now());return mode==='realtime'||(mode==='year'?d.getFullYear()===y:d.getFullYear()===y&&d.getMonth()===m)});
+  const ds=filtered.filter(x=>x._kind==='design'),ps=filtered.filter(x=>x._kind==='product'),ts=filtered.filter(x=>x._kind==='todo');
+  $('reportDesign').textContent=can('design','view')?ds.length:'—';$('reportProduct').textContent=can('products','view')?ps.length:'—';$('reportTodo').textContent=ts.filter(t=>t.status!=='Done').length;$('reportDept').textContent=departments.length;
+  const label=mode==='realtime'?'Semua data (realtime)':mode==='year'?'Tahun '+y:(monthEl.options[m]?.text||'')+' '+y;
+  $('reportPeriodNote').textContent='Periode: '+label+'. Riwayat tiap item disimpan dengan tanggal dibuat di browser ini.';
+  const depts=[...new Set(ds.map(x=>x.dept))];
+  $('deptReport').innerHTML=depts.map(d=>{const n=ds.filter(x=>x.dept===d).length;return `<div style="margin:13px 0"><div style="display:flex;justify-content:space-between;font-size:11px"><b>${esc(d)}</b><span>${n} request</span></div><div style="height:7px;background:#edf0ea;border-radius:8px;margin-top:6px"><div style="height:7px;width:${ds.length?n/ds.length*100:0}%;background:linear-gradient(120deg,#8caee2,#d99fc7);border-radius:8px"></div></div></div>`}).join('')||'<div class="empty">Belum ada request pada periode ini.</div>';
+  $('productReport').innerHTML=can('products','view')?boards.productCats.map(c=>`<div class="mini-task" style="margin:8px 0"><strong>${esc(productTitle(c))}</strong><span class="tag">${ps.filter(p=>p.category===c).length} produk</span></div>`).join(''):'<div class="empty">Kamu belum memiliki akses Product Management.</div>';
+}
+
+/* =====================================================================
+   13. SETTINGS (KHUSUS OWNER ADMIN)
+   ===================================================================== */
+function deptOptions(sel){const list=sel&&!departments.includes(sel)?[sel,...departments]:departments;return list.map(d=>`<option ${d===sel?'selected':''}>${esc(d)}</option>`).join('')}
+function renderSettings(){
+  if(!isOwner()){['departmentList','accessRequests','memberStatus','boardConfig'].forEach(id=>$(id).innerHTML='');return}
+  // URL publik
+  const base=getPublicBase(),inp=$('publicBaseInput');if(document.activeElement!==inp)inp.value=base;
+  $('inviteLinkPreview').textContent=base+'?inv='+encodeInvite({email:'nama@perusahaan.com',name:'Nama',dept:departments[0]||'',design:{view:true},products:{},updatedAt:nowISO()});
+  // Departemen & preview
+  $('departmentList').innerHTML=departments.map((d,i)=>`<div class="mini-task"><strong>${esc(d)}</strong><div class="toolbar"><button class="secondary" onclick="renameDepartment(${i})">Ubah</button><button class="secondary danger" onclick="removeDepartment(${i})">Hapus</button></div></div>`).join('');
+  $('previewDept').innerHTML=['Designer',...departments].map(d=>`<option ${previewDept===d?'selected':''}>${esc(d)}</option>`).join('');
+  $('greetingPreview').textContent='Contoh dashboard: Good morning, '+previewDept+' 👋';
+  const idp=$('inviteDept'),cur=idp.value;idp.innerHTML=departments.map(d=>`<option ${cur===d?'selected':''}>${esc(d)}</option>`).join('');
+  renderInviteRolePreview();
+  $('inviteBtn').disabled=false;
+  renderRequests();renderMemberStatus();renderBoardConfig();
+  $('soundPreference').checked=soundEnabled;
+}
+function renderInviteRolePreview(){$('inviteRolePreview').innerHTML=roleBadge('member',$('inviteDept').value)}
+function savePublicBase(){if(!requireOwner())return;const err=$('publicBaseErr');try{const v=normalizeBaseUrl($('publicBaseInput').value);store(K.publicBase,v);err.textContent='';$('publicBaseInput').blur();renderSettings();showToast('success','URL publik disimpan','Link undangan baru akan memakai '+v)}catch(e){err.textContent=e.message}}
+function resetPublicBase(){if(!requireOwner())return;localStorage.removeItem(K.publicBase);$('publicBaseErr').textContent='';$('publicBaseInput').value=DEFAULT_PUBLIC_BASE;renderSettings();showToast('success','URL publik default dipakai',DEFAULT_PUBLIC_BASE)}
+function addDepartment(){if(!requireOwner())return;const el=$('newDept'),v=el.value.trim();if(!v)return;if(departments.some(d=>d.toLowerCase()===v.toLowerCase())){showToast('error','Departemen sudah ada',v);return}departments.push(v);el.value='';saveDepartments();renderAll()}
+function renameDepartment(i){if(!requireOwner())return;const old=departments[i],v=(prompt('Nama departemen baru:',old)||'').trim();if(!v||v===old)return;if(departments.some((d,j)=>j!==i&&d.toLowerCase()===v.toLowerCase())){showToast('error','Departemen sudah ada',v);return}departments[i]=v;designs.forEach(x=>{if(x.dept===old)x.dept=v});access.forEach(a=>{if(a.dept===old){a.dept=v;a.updatedAt=nowISO()}});if(previewDept===old){previewDept=v;store(K.previewDept,v)}saveDepartments();saveData();saveAccess();renderAll()}
+function removeDepartment(i){if(!requireOwner())return;const d=departments[i];if(designs.some(x=>x.dept===d)||access.some(a=>a.dept===d)){showToast('error','Departemen masih dipakai','Pindahkan request/anggota dari departemen '+d+' terlebih dahulu.');return}if(confirm('Hapus departemen '+d+'?')){departments.splice(i,1);saveDepartments();renderAll()}}
+function setPreviewDept(v){if(!isOwner())return;previewDept=v;store(K.previewDept,v);renderDashboard();renderSettings()}
+function syncPermBoxes(prefix,kind){const v=$(prefix+'View'),e=$(prefix+'Edit');if(!v||!e)return;if(kind==='edit'&&e.checked)v.checked=true;if(kind==='view'&&!v.checked)e.checked=false}
+
+// ----- Undangan via EmailJS -----
+function accessSummary(a){return a.role==='AdminACC'?'ADMIN (ACC) — Design Request & Product Management: Lihat & Edit':'Design Request: '+permLabel(a.design)+' · Product Management: '+permLabel(a.products)}
+async function sendInviteEmail(a){
+  if(!window.emailjs)throw{text:'Layanan email (EmailJS) belum termuat. Periksa koneksi internet lalu muat ulang halaman.'};
+  const link=inviteLinkFor(a);
+  await emailjs.send(EMAILJS_CONFIG.serviceId,EMAILJS_CONFIG.templateId,{to_name:a.name||a.email,to_email:a.email,from_name:OWNER_NAME,reply_to:OWNER_EMAIL,role:roleText(roleKind(a),a.dept),dept:a.dept||'-',access:accessSummary(a),greeting:'Good morning, '+(a.dept||'Team')+' 👋',workspace_link:link,invite_link:link},{publicKey:EMAILJS_CONFIG.publicKey});
+  return link;
+}
+function emailError(err){return((err&&(err.text||err.message))||'Terjadi kesalahan tidak diketahui.')+(err&&err.status?' (kode '+err.status+')':'')}
+async function inviteMember(){
+  if(!requireOwner())return;
+  const name=$('inviteName').value.trim(),email=normEmail($('inviteEmail').value),dept=$('inviteDept').value,btn=$('inviteBtn');
+  const ck=id=>!!$(id).checked,design={view:ck('inviteDesignView')||ck('inviteDesignEdit'),edit:ck('inviteDesignEdit')},prods={view:ck('inviteProductsView')||ck('inviteProductsEdit'),edit:ck('inviteProductsEdit')};
+  if(!name||!email){showToast('error','Data belum lengkap','Isi nama dan email penerima terlebih dahulu.');return}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){showToast('error','Format email tidak valid','Contoh: nama@perusahaan.com');return}
+  if(email===OWNER_EMAIL){showToast('error','Email Owner Admin','Email ini adalah Owner Admin dan tidak perlu diundang.');return}
+  let a=findAccess(email);
+  if(a&&a.role==='AdminACC'&&!confirm(name+' saat ini berstatus ADMIN (ACC). Undangan dari form ini mengubahnya menjadi ANGGOTA dengan akses yang dipilih. Lanjutkan?'))return;
+  if(!a){a=normalizeAccess({email});access.unshift(a)}
+  Object.assign(a,{name,dept,role:'Member',design,products:prods,prevPerms:null,updatedAt:nowISO()});saveAccess();
+  const old=btn.textContent;btn.disabled=true;btn.textContent='Mengirim undangan…';
+  try{
+    await sendInviteEmail(a);a.invitedAt=a.updatedAt;if(a.status!=='active')a.status='invited';saveAccess();
+    $('inviteName').value='';$('inviteEmail').value='';
+    showToast('success','Undangan terkirim','Email undangan dikirim ke '+name+' ('+email+'). '+accessSummary(a)+'.');
+  }catch(err){console.error('EmailJS error:',err);showToast('error','Gagal mengirim undangan','Email ke '+email+' tidak terkirim: '+emailError(err)+' Akun tersimpan — kamu bisa coba Kirim ulang atau Salin link dari daftar status akun.')}
+  finally{btn.disabled=false;btn.textContent=old||'＋ Kirim undangan';renderSettings()}
+}
+async function resendInvite(email,btn){
+  if(!requireOwner())return;const a=findAccess(email);if(!a)return;
+  if(btn){btn.disabled=true;btn.textContent='Mengirim…'}
+  try{a.updatedAt=nowISO();await sendInviteEmail(a);a.invitedAt=a.updatedAt;if(a.status!=='active')a.status='invited';saveAccess();showToast('success','Undangan terkirim ulang',(a.name||a.email)+' · '+accessSummary(a))}
+  catch(err){console.error('EmailJS error:',err);saveAccess();showToast('error','Gagal mengirim undangan',emailError(err)+' Gunakan "Salin link" sebagai alternatif.')}
+  finally{renderSettings()}
+}
+function copyInviteLink(email){if(!requireOwner())return;const a=findAccess(email);if(a)copyText(inviteLinkFor(a),'Link undangan '+(a.name||a.email)+' disalin')}
+
+// ----- Status akun & izin per modul -----
+function memberStatusTag(a){if(a.status==='active')return'<span class="tag green">● Aktif</span>';if(a.status==='invited')return'<span class="tag blue">✉ Undangan terkirim</span>';return'<span class="tag orange">Belum terkirim</span>'}
+function renderMemberStatus(){
+  const order={active:0,invited:1,draft:2};
+  const ownerCard=`<div class="member-card"><div class="member-head"><div><b>${esc(OWNER_NAME)} (Pemilik)</b><div class="member-meta">${OWNER_EMAIL} · Semua modul: Lihat & Edit · Settings & kontrol akses</div></div><div class="badge-row">${roleBadge('owner')}<span class="tag green">● Aktif</span></div></div></div>`;
+  const cards=access.slice().sort((x,y)=>(order[x.status]-order[y.status])||String(x.name||x.email).localeCompare(String(y.name||y.email))).map(a=>{
+    const adm=a.role==='AdminACC',e=jsArg(a.email),unsent=a.invitedAt&&new Date(a.updatedAt)>new Date(a.invitedAt);
+    const perm=mod=>{const p=permPair(a[mod]);return `<b>${MODULES[mod]}</b><label><input type="checkbox" ${p.view?'checked':''}${adm?' disabled':''} onchange="setAccessFlag(${e},'${mod}','view',this.checked)"> Lihat</label><label><input type="checkbox" ${p.edit?'checked':''}${adm?' disabled':''} onchange="setAccessFlag(${e},'${mod}','edit',this.checked)"> Edit</label>`};
+    return `<div class="member-card"><div class="member-head"><div><b>${esc(a.name||a.email)}</b><div class="member-meta">${esc(a.email)} · Departemen: ${esc(a.dept||'-')}</div><div class="member-meta">${a.invitedAt?'Diundang '+fmtDT(a.invitedAt):'Belum diundang'}${a.activeAt?' · Aktif sejak '+fmtDT(a.activeAt):''}</div></div><div class="badge-row">${roleBadge(roleKind(a),a.dept)}${memberStatusTag(a)}${unsent?'<span class="tag purple">Perubahan belum dikirim</span>':''}</div></div>
+      <div class="v5-perm">${perm('design')}${perm('products')}</div>${adm?'<div class="member-meta" style="margin-top:6px">ADMIN (ACC): Lihat & Edit semua modul. Settings & kontrol akses tetap khusus Owner Admin.</div>':''}
+      <div class="member-actions"><select class="select" title="Departemen" onchange="setMemberDept(${e},this.value)">${deptOptions(a.dept)}</select><button class="secondary" onclick="toggleAdminAcc(${e})">${adm?'Cabut ADMIN (ACC)':'ACC sebagai ADMIN'}</button><button class="secondary" onclick="copyInviteLink(${e})">🔗 Salin link</button><button class="secondary" onclick="resendInvite(${e},this)">✉ ${a.invitedAt?'Kirim ulang':'Kirim'} undangan</button><button class="secondary danger" onclick="removeMember(${e})">🗑 Hapus akun</button></div></div>`;
+  });
+  $('memberStatus').innerHTML=`<div class="section-head" style="margin:18px 0 4px"><div><h2 style="font-size:13px">Daftar akun (${access.length+1})</h2><p>Aktif = link undangan sudah dibuka anggota.</p></div></div>`+ownerCard+(cards.join('')||'<div class="empty">Belum ada anggota undangan.</div>');
+}
+function touchMember(a,msg){a.updatedAt=nowISO();saveAccess();renderSettings();showToast('success','Akses diperbarui',msg+' Klik "Kirim ulang undangan" agar berlaku di perangkat anggota.')}
+function setAccessFlag(email,mod,kind,val){if(!requireOwner()||!MODULES[mod])return;const a=findAccess(email);if(!a||a.role==='AdminACC'){renderSettings();return}const p=permPair(a[mod]);p[kind]=!!val;if(kind==='edit'&&val)p.view=true;if(kind==='view'&&!val)p.edit=false;a[mod]=p;touchMember(a,(a.name||a.email)+' · '+MODULES[mod]+': '+permLabel(p)+'.')}
+function setMemberDept(email,dept){if(!requireOwner())return;const a=findAccess(email);if(!a||a.dept===dept)return;a.dept=dept;touchMember(a,(a.name||a.email)+' kini di departemen '+dept+'.')}
+function toggleAdminAcc(email){
+  if(!requireOwner())return;const a=findAccess(email);if(!a)return;
+  if(a.role==='AdminACC'){if(!confirm('Cabut status ADMIN (ACC) dari '+(a.name||a.email)+'?'))return;a.role='Member';const pp=a.prevPerms||{};a.design=permPair(pp.design);a.products=permPair(pp.products);a.prevPerms=null;touchMember(a,(a.name||a.email)+' kembali menjadi ANGGOTA.');return}
+  if(!confirm('ACC '+(a.name||a.email)+' sebagai ADMIN (ACC)?\n\nAnggota ini mendapat akses Lihat & Edit di semua modul. Settings & kontrol akses tetap hanya untuk Owner Admin.'))return;
+  a.prevPerms={design:permPair(a.design),products:permPair(a.products)};a.role='AdminACC';a.design=FULL();a.products=FULL();touchMember(a,(a.name||a.email)+' di-ACC sebagai ADMIN (ACC).');
+}
+function removeMember(email){if(!requireOwner())return;const a=findAccess(email);if(!a||!confirm('Hapus akun '+(a.name||a.email)+' dari daftar anggota?'))return;access=access.filter(x=>x!==a);requests=requests.filter(r=>!(r.email===a.email&&r.status==='pending'));saveAccess();saveRequests();renderSettings();showToast('success','Akun dihapus',(a.name||a.email)+' dihapus dari daftar anggota di browser ini.')}
+
+// ----- Permintaan akses (wajib ACC Owner Admin) -----
+function requestSummary(r){return r.admin?'Minta status ADMIN (ACC)':'Design: '+permLabel(r.design)+' · Produk: '+permLabel(r.products)}
+function renderRequests(){
+  const pending=requests.filter(r=>r.status==='pending');
+  $('accessRequests').innerHTML=pending.length?`<div class="section-head" style="margin:16px 0 4px"><div><h2 style="font-size:13px">⏳ Permintaan akses menunggu ACC (${pending.length})</h2></div></div>`+pending.map(r=>{const cur=findAccess(r.email);return `<div class="req-card"><div class="member-head"><div><b>${esc(r.name||r.email)}</b><div class="member-meta">${esc(r.email)} · ${esc(r.dept||'-')} · ${fmtDT(r.at)}</div><div class="member-meta">Saat ini: ${cur?esc(roleText(roleKind(cur),cur.dept)+' · '+accessSummary(cur)):'belum terdaftar'}</div><div style="font-size:12px;margin-top:6px"><b>Diminta:</b> ${esc(requestSummary(r))}${r.note?' · “'+esc(r.note)+'”':''}</div></div><div class="toolbar"><button class="primary" onclick="resolveRequest(${jsArg(r.id)},true)">ACC</button><button class="secondary danger" onclick="resolveRequest(${jsArg(r.id)},false)">Tolak</button></div></div></div>`}).join(''):'';
+}
+function importRequestFromInput(){if(!requireOwner())return;const raw=$('requestLinkInput').value.trim();if(!raw)return;let code=raw;try{code=new URL(raw).searchParams.get('req')||raw}catch(_){}if(importRequest(code))$('requestLinkInput').value=''}
+async function resolveRequest(id,ok){
+  if(!requireOwner())return;const r=requests.find(x=>x.id===id);if(!r||r.status!=='pending')return;
+  let a=null;
+  if(ok){a=findAccess(r.email);if(!a){a=normalizeAccess({email:r.email,name:r.name,dept:r.dept});access.unshift(a)}a.name=a.name||r.name;a.dept=a.dept||r.dept;
+    if(r.admin){if(a.role!=='AdminACC')a.prevPerms={design:permPair(a.design),products:permPair(a.products)};a.role='AdminACC';a.design=FULL();a.products=FULL()}
+    else{a.role='Member';a.prevPerms=null;a.design=permPair(r.design);a.products=permPair(r.products)}
+    a.updatedAt=nowISO();saveAccess()}
+  r.status=ok?'approved':'rejected';r.resolvedAt=nowISO();saveRequests();renderSettings();
+  showToast(ok?'success':'error',ok?'Permintaan di-ACC':'Permintaan ditolak',(r.name||r.email)+(ok?' · '+accessSummary(a):' tidak mendapat perubahan akses.'));
+  if(ok&&confirm('Kirim link akses terbaru ke '+r.email+' sekarang? Akses baru berlaku di perangkat anggota setelah link dibuka.'))resendInvite(r.email);
+}
+
+// ----- Pengaturan board -----
+function renderBoardConfig(){
+  const d=boards.designStages.map((s,i)=>`<div class="mini-task"><strong>${esc(s)}</strong><div class="toolbar"><input class="board-color" type="color" value="${boards.designColors[s]||PALETTE[i%PALETTE.length]}" onchange="setBoardColor('design',${i},this.value)"><button class="secondary" onclick="renameDesignStage(${i})">✎ Ubah judul</button><button class="secondary danger" onclick="deleteDesignStage(${i})">🗑 Hapus</button></div></div>`).join('');
+  const p=boards.productCats.map((c,i)=>`<div class="member-card"><div class="board-row"><strong>${esc(productTitle(c))}</strong><div class="toolbar"><input class="board-color" type="color" value="${boards.productColors[c]||PALETTE[(i+3)%PALETTE.length]}" onchange="setBoardColor('product',${i},this.value)"><button class="secondary" onclick="renameProductBoard(${i})">✎ Ubah judul</button><button class="secondary danger" onclick="deleteProductBoard(${i})">🗑 Hapus board</button></div></div><div class="stage-chips">${stagesOf(c).map((s,j)=>`<span class="stage-chip">${esc(s)}<button title="Ubah tahapan" onclick="renameProductStage(${i},${j})">✎</button><button title="Hapus tahapan" onclick="deleteProductStage(${i},${j})">✕</button></span>`).join('')}<button class="secondary col-btn" onclick="addProductStage(${i})">＋ Tahap</button></div></div>`).join('');
+  $('boardConfig').innerHTML=`<div class="section-head" style="margin:10px 0 6px"><div><h2 style="font-size:13px">Kolom Design Request</h2></div><button class="secondary" onclick="addDesignStage()">＋ Tambah kolom</button></div><div class="mini-list">${d}</div><div class="section-head" style="margin:20px 0 6px"><div><h2 style="font-size:13px">Board Product Management</h2></div><button class="secondary" onclick="addProductBoard()">＋ Tambah board</button></div>${p}`;
+}
+
+/* =====================================================================
+   14. LOGIN OWNER, LOGOUT, PERMINTAAN AKSES ANGGOTA
+   ===================================================================== */
+function authAction(){if(isOwner()||isMember()){if(!confirm('Keluar dari akun '+currentActor()+'?'))return;session=null;saveSession();closeModal();currentPage='dashboard';renderAll();openLogin();return}openLogin()}
+let loginFails=0,loginLockUntil=0;
+function openLogin(){
+  openModal(`<div class="eyebrow">DESIGN TASK WORKSPACE</div><h2>Masuk sebagai Owner Admin</h2><p class="modal-sub">Hanya pemilik workspace yang dapat masuk dengan email dan kode admin.</p><form id="ownerLoginForm"><div class="formgrid"><div class="field full"><label>Email Owner Admin</label><input id="ownerEmail" type="email" autocomplete="username" placeholder="email@perusahaan.com" required></div><div class="field full"><label>Kode admin</label><input id="ownerCode" type="password" autocomplete="current-password" placeholder="Masukkan kode admin" required></div></div><div class="v5-err" id="ownerLoginErr"></div><div class="notice">Anggota tim: buka link undangan dari email untuk masuk otomatis dengan departemen, sapaan, dan akses yang sudah diatur Owner Admin. Tidak perlu akun Netlify.</div><div class="modal-actions"><button type="button" class="secondary" onclick="closeModal()">Lanjut sebagai tamu</button><button class="primary" type="submit" id="ownerLoginBtn">Masuk</button></div></form>`);
+  $('ownerLoginForm').onsubmit=async e=>{
+    e.preventDefault();const err=$('ownerLoginErr'),btn=$('ownerLoginBtn'),now=Date.now();
+    if(now<loginLockUntil){err.textContent='Terlalu banyak percobaan. Coba lagi dalam '+Math.ceil((loginLockUntil-now)/1000)+' detik.';return}
+    const email=normEmail($('ownerEmail').value),code=$('ownerCode').value;
+    if(!window.crypto||!crypto.subtle){err.textContent='Browser ini tidak mendukung verifikasi aman. Buka workspace melalui HTTPS.';return}
+    btn.disabled=true;let ok=false;try{ok=email===OWNER_EMAIL&&(await sha256Hex(email+':'+code))===OWNER_HASH}catch(_){ok=false}btn.disabled=false;
+    if(!ok){if(++loginFails>=5){loginLockUntil=Date.now()+30000;loginFails=0}err.textContent='Email atau kode admin salah. Hanya Owner Admin yang dapat masuk di sini.';return}
+    loginFails=0;session={type:'owner',email:OWNER_EMAIL,at:nowISO()};saveSession();closeModal();renderAll();
+    showToast('success','Masuk sebagai OWNER ADMIN','Kamu memiliki akses penuh ke semua modul, Settings & kontrol akses.');importStashedRequest();
+  };
+  setTimeout(()=>$('ownerEmail')?.focus(),30);
+}
+function openAccessRequest(){
+  if(!isMember())return;const a=myAccess()||{design:{},products:{}},email=normEmail(session.email);
+  const pend=requests.find(r=>r.email===email&&r.status==='pending');const src=pend||a;
+  const box=(mod,kind)=>{const pp=permPair(src[mod]),id='req'+(mod==='design'?'Design':'Products');return `<label><input type="checkbox" id="${id}${kind==='view'?'View':'Edit'}" ${pp[kind]?'checked':''} onchange="syncPermBoxes('${id}','${kind}')"> ${kind==='view'?'Lihat':'Edit'}</label>`};
+  openModal(`<div class="eyebrow">AKSES SAYA</div><h2>Minta perubahan akses</h2><div class="access-chips" style="margin:0 0 10px">${myBadge()}</div><p class="modal-sub">Akses saat ini — ${esc(accessSummary(a))}. Perubahan baru berlaku setelah di-ACC oleh Owner Admin (${OWNER_EMAIL}).</p>${pend?'<div class="v5-lock">⏳ Permintaan sebelumnya masih menunggu ACC. Mengirim ulang akan menggantikannya.</div>':''}<div class="v5-perm"><b>Design Request</b>${box('design','view')}${box('design','edit')}<b>Product Management</b>${box('products','view')}${box('products','edit')}</div><label style="display:flex;gap:7px;align-items:center;font-size:12px;margin-top:12px"><input type="checkbox" id="reqAdmin" ${(pend&&pend.admin)?'checked':''}> Minta status <b>ADMIN (ACC)</b> — Lihat & Edit semua modul</label><div class="field" style="margin-top:12px"><label>Catatan untuk Owner Admin</label><textarea id="reqNote" maxlength="240" placeholder="Contoh: perlu edit Design Request untuk update status brief"></textarea></div><div class="modal-actions"><button class="secondary" onclick="closeModal()">Batal</button><button class="primary" onclick="submitAccessRequest()">Kirim permintaan</button></div>`);
+}
+function submitAccessRequest(){
+  if(!isMember())return;const ck=id=>!!$(id)?.checked,email=normEmail(session.email);
+  const r={id:'r'+Date.now().toString(36),email,name:session.name,dept:myDept(),design:{view:ck('reqDesignView')||ck('reqDesignEdit'),edit:ck('reqDesignEdit')},products:{view:ck('reqProductsView')||ck('reqProductsEdit'),edit:ck('reqProductsEdit')},admin:ck('reqAdmin'),note:($('reqNote').value||'').trim().slice(0,240),status:'pending',at:new Date(Math.floor(Date.now()/1000)*1000).toISOString(),via:'local'};
+  requests=requests.filter(x=>!(x.email===email&&x.status==='pending'));requests.unshift(r);saveRequests();
+  const link=requestLinkFor(r);
+  const mail='mailto:'+OWNER_EMAIL+'?subject='+encodeURIComponent('Permintaan akses Design Task Manager — '+(r.name||email))+'&body='+encodeURIComponent('Halo Owner Admin,\n\n'+(r.name||email)+' ('+(r.dept||'-')+') meminta: '+requestSummary(r)+(r.note?'\nCatatan: '+r.note:'')+'\n\nBuka link ini untuk meninjau dan ACC di Settings:\n'+link+'\n');
+  openModal(`<div class="eyebrow">PERMINTAAN TERKIRIM KE ANTREAN</div><h2>Tinggal kirim ke Owner Admin</h2><p class="modal-sub">Akses baru hanya berlaku setelah di-ACC oleh ${OWNER_EMAIL}. Kirim link permintaan berikut lewat email agar Owner Admin bisa meninjaunya dari perangkatnya.</p><div class="link-preview">${esc(link)}</div><div class="modal-actions"><button class="secondary" onclick="copyText(${jsArg(link)},'Link permintaan disalin')">🔗 Salin link</button><a class="primary" style="text-decoration:none" href="${esc(mail)}">✉ Email Owner Admin</a></div>`);
+}
+
+/* =====================================================================
+   15. NOTIFIKASI CHAT & SINKRON ANTAR-TAB
+   ===================================================================== */
+function playChatSound(){if(!soundEnabled)return;try{const C=window.AudioContext||window.webkitAudioContext,ctx=new C(),o=ctx.createOscillator(),g=ctx.createGain();o.type='sine';o.frequency.setValueAtTime(740,ctx.currentTime);o.frequency.setValueAtTime(980,ctx.currentTime+.12);g.gain.setValueAtTime(.0001,ctx.currentTime);g.gain.exponentialRampToValueAtTime(.12,ctx.currentTime+.02);g.gain.exponentialRampToValueAtTime(.0001,ctx.currentTime+.35);o.connect(g);g.connect(ctx.destination);o.start();o.stop(ctx.currentTime+.36);setTimeout(()=>ctx.close(),500)}catch(_){}}
+function toggleChatSound(v){soundEnabled=!!v;localStorage.setItem(K.sound,String(soundEnabled))}
+window.addEventListener('storage',e=>{
+  if(!e.key||!e.key.startsWith('dtm_'))return;
+  if(e.key===K.design&&soundEnabled){try{const count=v=>(JSON.parse(v||'[]')||[]).reduce((n,x)=>n+((x&&x.chat)||[]).length,0);if(count(e.newValue)>count(e.oldValue))playChatSound()}catch(_){}}
+  loadState();renderAll();
+});
+
+/* =====================================================================
+   16. START
+   ===================================================================== */
+if(window.emailjs)emailjs.init({publicKey:EMAILJS_CONFIG.publicKey});
+loadState();
+saveData();saveBoards();saveAccess();localStorage.removeItem(K.invites); // simpan hasil migrasi data lama
+const startNotice=consumeUrl();
+renderAll();
+if(startNotice)showToast(...startNotice);
+if(isOwner())importStashedRequest();
+else if(!session)openLogin();
+</script>
+</body>
+</html>
