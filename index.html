@@ -301,13 +301,13 @@ function loadState(){
   designs.forEach(x=>{if(!x.createdAt)x.createdAt=nowISO();if(!boards.designStages.includes(x.status))x.status=boards.designStages[0]});
   products.forEach(p=>{if(!p.createdAt)p.createdAt=nowISO();if(!boards.productCats.includes(p.category))p.category=boards.productCats[0];const st=stagesOf(p.category);if(!st.includes(p.status))p.status=st[0]});
 }
-function saveData(){store(K.design,designs);store(K.products,products);store(K.todos,todos)}
+function saveData(){store(K.design,designs);store(K.products,products);store(K.todos,todos);pushCloudData();}
 function saveBoards(){store(K.designStages,boards.designStages);store(K.productTitles,boards.productTitles);store(K.productStages,boards.productStages);store(K.productCats,boards.productCats);store(K.designColors,boards.designColors);store(K.productColors,boards.productColors)}
 function saveAccess(){store(K.access,access)}
 function saveRequests(){store(K.requests,requests)}
 function saveDepartments(){store(K.departments,departments)}
 function saveSession(){if(session)store(K.session,session);else localStorage.removeItem(K.session)}
-function logActivity(text){activities.unshift([text,currentActor()+' · '+new Date().toLocaleString('id-ID',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})]);activities=activities.slice(0,30);store(K.activities,activities)}
+function logActivity(text){activities.unshift([text,currentActor()+' · '+new Date().toLocaleString('id-ID',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})]);activities=activities.slice(0,30);store(K.activities,activities);pushCloudData();}
 function productTitle(c){return boards.productTitles[c]||c}
 function stagesOf(c){return boards.productStages[c]||[]}
 
@@ -797,6 +797,85 @@ window.addEventListener('storage',e=>{
   if(e.key===K.design&&soundEnabled){try{const count=v=>(JSON.parse(v||'[]')||[]).reduce((n,x)=>n+((x&&x.chat)||[]).length,0);if(count(e.newValue)>count(e.oldValue))playChatSound()}catch(_){}}
   loadState();renderAll();
 });
+const SUPABASE_URL = 'https://ksbbuxraxlbejnzlsizf.supabase.co';
+const SUPABASE_ANON_KEY = 'sb_publishable_wHJ8zxnFkXJE4QMFGMZFUw_MsX9WQZJ';
+
+let sbReady = false;
+let sbPollTimer = null;
+
+function hasSupabaseConfig() {
+  return (
+    SUPABASE_URL &&
+    SUPABASE_ANON_KEY &&
+    !SUPABASE_ANON_KEY.includes('TEMPEL_KEY')
+  );
+}
+
+function sbHeaders() {
+  return {
+    apikey: SUPABASE_ANON_KEY,
+    Authorization: 'Bearer ' + SUPABASE_ANON_KEY,
+    'Content-Type': 'application/json',
+    Prefer: 'return=minimal'
+  };
+}
+
+async function pullCloudData(silent = false) {
+  if (!hasSupabaseConfig()) return;
+  try {
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/workspace_state?id=eq.main&select=designs,products,activities`,
+      { headers: sbHeaders(), cache: 'no-store' }
+    );
+    if (!res.ok) return;
+    const rows = await res.json();
+    const row = Array.isArray(rows) ? rows[0] : null;
+    if (!row) return;
+
+    let changed = false;
+    if (Array.isArray(row.designs) && JSON.stringify(row.designs) !== JSON.stringify(designs)) {
+      designs = row.designs;
+      store(K.design, designs);
+      changed = true;
+    }
+    if (Array.isArray(row.products) && JSON.stringify(row.products) !== JSON.stringify(products)) {
+      products = row.products;
+      store(K.products, products);
+      changed = true;
+    }
+    if (Array.isArray(row.activities) && JSON.stringify(row.activities) !== JSON.stringify(activities)) {
+      activities = row.activities;
+      store(K.activities, activities);
+      changed = true;
+    }
+
+    if (changed && !silent) renderAll();
+  } catch (_) {}
+}
+
+async function pushCloudData() {
+  if (!hasSupabaseConfig() || !sbReady) return;
+  try {
+    await fetch(`${SUPABASE_URL}/rest/v1/workspace_state?id=eq.main`, {
+      method: 'PATCH',
+      headers: sbHeaders(),
+      body: JSON.stringify({
+        designs,
+        products,
+        activities,
+        updated_at: nowISO()
+      })
+    });
+  } catch (_) {}
+}
+
+function initSupabaseSync() {
+  if (!hasSupabaseConfig()) return;
+  sbReady = true;
+  pullCloudData(false);
+  if (sbPollTimer) clearInterval(sbPollTimer);
+  sbPollTimer = setInterval(() => pullCloudData(false), 5000);
+}
 
 /* =====================================================================
    16. START
@@ -806,6 +885,7 @@ loadState();
 saveData();saveBoards();saveAccess();localStorage.removeItem(K.invites); // simpan hasil migrasi data lama
 const startNotice=consumeUrl();
 renderAll();
+initSupabaseSync();
 if(startNotice)showToast(...startNotice);
 if(isOwner())importStashedRequest();
 else if(!session)openLogin();
